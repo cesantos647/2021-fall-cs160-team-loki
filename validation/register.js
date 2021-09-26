@@ -1,37 +1,43 @@
-const Validator = require("validator");
-const isEmpty = require("is-empty");
-module.exports = function validateRegisterInput(data) {
-  let errors = {};
-// Convert empty fields to an empty string so we can use validator functions
-  data.name = !isEmpty(data.name) ? data.name : "";
-  data.email = !isEmpty(data.email) ? data.email : "";
-  data.password = !isEmpty(data.password) ? data.password : "";
-  data.password2 = !isEmpty(data.password2) ? data.password2 : "";
-// Name checks
-  if (Validator.isEmpty(data.name)) {
-    errors.name = "Name field is required";
-  }
-// Email checks
-  if (Validator.isEmpty(data.email)) {
-    errors.email = "Email field is required";
-  } else if (!Validator.isEmail(data.email)) {
-    errors.email = "Email is invalid";
-  }
-// Password checks
-  if (Validator.isEmpty(data.password)) {
-    errors.password = "Password field is required";
-  }
-if (Validator.isEmpty(data.password2)) {
-    errors.password2 = "Confirm password field is required";
-  }
-if (!Validator.isLength(data.password, { min: 6, max: 30 })) {
-    errors.password = "Password must be at least 6 characters";
-  }
-if (!Validator.equals(data.password, data.password2)) {
-    errors.password2 = "Passwords must match";
-  }
-return {
-    errors,
-    isValid: isEmpty(errors)
-  };
-};
+const Joi = require('joi')
+
+module.exports = Joi.object({
+  name: Joi.string()
+    .alphanum()
+    .min(5)
+    .max(30)
+    .required()
+    .messages({
+      'any.required': 'name is required',
+      'string.alphanum': 'name must only contain letters and numbers',
+      'string.min': 'name must be at least 5 characters and at most 30 characters',
+      'string.max': 'name must be at least 5 characters and at most 30 characters'
+    }),
+
+  email: Joi.string()
+    .email()
+    .max(64)
+    .required()
+    .messages({
+      'any.required': 'email is required',
+      'string.min': 'email must be at most 64 characters',
+      'string.email': 'email must be a valid email',
+    }),
+
+  password: Joi.string()
+    .min(6)
+    .max(30)
+    .required()
+    .messages({
+      'any.required': 'password is required',
+      'string.min': 'password must be at least 6 characters and at most 30 characters',
+      'string.max': 'password must be at least 6 characters and at most 30 characters'
+    }),
+  
+  password2: Joi.string()
+    .equal(Joi.ref('password'))
+    .required()
+    .messages({
+      'any.required': 'password2 is required',
+      'any.only': 'password2 must be the same as password'
+    })
+})
