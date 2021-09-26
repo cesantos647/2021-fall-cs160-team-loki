@@ -1,22 +1,19 @@
-const Validator = require("validator");
-const isEmpty = require("is-empty");
-module.exports = function validateLoginInput(data) {
-  let errors = {};
-// Convert empty fields to an empty string so we can use validator functions
-  data.email = !isEmpty(data.email) ? data.email : "";
-  data.password = !isEmpty(data.password) ? data.password : "";
-// Email checks
-  if (Validator.isEmpty(data.email)) {
-    errors.email = "Email field is required";
-  } else if (!Validator.isEmail(data.email)) {
-    errors.email = "Email is invalid";
-  }
-// Password checks
-  if (Validator.isEmpty(data.password)) {
-    errors.password = "Password field is required";
-  }
-return {
-    errors,
-    isValid: isEmpty(errors)
-  };
-};
+const Joi = require('joi')
+
+module.exports = Joi.object({
+  email: Joi.string()
+    .email()
+    .max(64)
+    .required()    
+    .messages({
+      'any.required': 'email is required',
+      'string.min': 'email must be at most 64 characters',
+      'string.email': 'email must be a valid email',
+    }),
+
+  password: Joi.string()
+    .required()
+    .messages({
+      'any.required': 'password is required',
+    })
+})
