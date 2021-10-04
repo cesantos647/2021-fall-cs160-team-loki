@@ -7,11 +7,11 @@ class Landing extends Component {
       <div style={{ height: "75vh" }} className="container valign-wrapper">
         <div className="row">
           <div className="col s12 center-align">
-            <h4>
+            <h4 className="text-5xl">
               <b>Get started</b> with {" "}
               <span style={{ fontFamily: "monospace" }}>Sanvac</span>
             </h4>
-            <p className="flow-text grey-text text-darken-1">
+            <p className="border-black border-2 border-dotted flow-text grey-text text-darken-1">
                With our intuitive learning management system, you'll have all the tools you need to succeed - without the hassle.
                You're just one click away!!!
             </p>
