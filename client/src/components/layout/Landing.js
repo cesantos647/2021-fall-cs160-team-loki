@@ -13,7 +13,7 @@ class Landing extends Component {
             </h4>
             <p className="flow-text grey-text text-darken-1">
                With our intuitive learning management system, you'll have all the tools you need to succeed - without the hassle.
-               You're just one click away.
+               You're just one click away!!!
             </p>
             <br />
             <div className="col s6">
