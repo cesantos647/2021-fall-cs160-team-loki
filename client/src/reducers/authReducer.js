@@ -10,8 +10,9 @@ import {
     user: {},
     loading: false
   };
-  
-  export default function(state = initialState, action) {
+
+  // eslint-disable-next-line
+  export default function (state = initialState, action) {
     switch (action.type) {
       case SET_CURRENT_USER:
         return {
