@@ -13,7 +13,6 @@ const User = require("../../models/User");
 // @desc Register user
 // @access Public
 router.post("/register", (req, res) => {
-  console.log('heelo')
   // Form validation
   const { data, error } = validateRegisterInput.validate(req.body);
   // Check validation
