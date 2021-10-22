@@ -6,14 +6,16 @@ module.exports = Joi.object({
     .max(64)
     .required()    
     .messages({
-      'any.required': 'email is required',
-      'string.min': 'email must be at most 64 characters',
-      'string.email': 'email must be a valid email',
+      'any.required': 'Email is required',
+      'string.empty': 'Email is not allowed to be empty',
+      'string.min': 'Email must be at most 64 characters',
+      'string.email': 'Email must be a valid email',
     }),
 
   password: Joi.string()
     .required()
     .messages({
-      'any.required': 'password is required',
+      'any.required': 'Password is required',
+      'string.empty': 'Password is not allowed to be empty',
     })
 })

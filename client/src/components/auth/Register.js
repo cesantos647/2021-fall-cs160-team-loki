@@ -151,7 +151,10 @@ render() {
                   invalid: errors.password2
                 })}
               />
-              <span className="text-red-500 text-xs italic">{errors.password2}</span>
+              <span className="text-red-500 text-xs italic">
+                {errors.password2}
+                {errors.password2inputerror}
+              </span>
             </div>
             <div className="mt-8">
               <button 
