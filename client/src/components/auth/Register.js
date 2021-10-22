@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
 import classnames from "classnames";
 import Background from '../../images/towerhall.jpg';
+import { data } from "autoprefixer";
 
 const bgImage = {
   backgroundImage: `url(${Background})`
@@ -93,7 +94,10 @@ render() {
                   invalid: errors.name
                 })}
               />
-              <span className="text-red-500 text-xs italic">{errors.name}</span>
+              <span className="text-red-500 text-xs italic">
+                {errors.name}
+                {errors.nameinputerror}
+                </span>
             </div>
             <div className="mb-4">
               <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
@@ -109,7 +113,10 @@ render() {
                   invalid: errors.email
                 })}
               />
-              <span className="text-red-500 text-xs italic">{errors.email}</span>
+              <span className="text-red-500 text-xs italic">
+                {errors.email}
+                {errors.emailinputerror}
+                </span>
             </div>
             <div className="mb-4">
               <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
@@ -125,7 +132,10 @@ render() {
                   invalid: errors.password
                 })}
               />
-              <span className="text-red-500 text-xs italic">{errors.password}</span>
+              <span className="text-red-500 text-xs italic">
+                {errors.password}
+                {errors.passwordinputerror}
+                </span>
             </div>
             <div className="mb-4">
               <label class="block text-gray-700 text-sm font-bold mb-2" for="username">

@@ -96,6 +96,7 @@ this.props.loginUser(userData); // since we handle the redirect within our compo
                   <span className="text-red-500 text-xs italic">
                     {errors.email}
                     {errors.emailnotfound}
+                    {errors.emailinputerror}
                   </span>
                 </div>
                 <div className="">
@@ -115,6 +116,7 @@ this.props.loginUser(userData); // since we handle the redirect within our compo
                   <span className="text-red-500 text-xs italic">
                     {errors.password}
                     {errors.passwordincorrect}
+                    {errors.passwordinputerror}
                   </span>
                 </div>
                 <div className="mt-8">
@@ -135,6 +137,9 @@ this.props.loginUser(userData); // since we handle the redirect within our compo
                   </Link>
                 </div>
               </form>
+              <span className="text-red-500 text-xs italic">
+                {errors.inputerror}
+              </span>
             </div>
           </div>
         </div>

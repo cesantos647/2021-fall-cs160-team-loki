@@ -18,6 +18,14 @@ router.post("/register", (req, res) => {
   const { data, error } = validateRegisterInput.validate(req.body);
   // Check validation
   if (error) {
+    console.log(error);
+    if (error.message.startsWith('name')) {
+      return res.status(400).json({ nameinputerror: error.details[0].message });
+    } else if (error.message.startsWith('email')) {
+      return res.status(400).json({ emailinputerror: error.details[0].message });
+    } else if (error.message.startsWith('password')) {
+      return res.status(400).json({ passwordinputerror: error.details[0].message });
+    }
     return res.status(400).json(error.details[0].message);
   }
 
@@ -53,7 +61,12 @@ router.post("/login", (req, res) => {
   const { data, error } = validateLoginInput.validate(req.body);
   // Check validation
   if (error) {
-    return res.status(400).json(error.details[0].message);
+    console.log(error);
+    if (error.message.startsWith('"email"')) {
+      console.log("starts with email");
+      return res.status(400).json({ emailinputerror: error.details[0].message });
+    }
+    return res.status(400).json({ passwordinputerror: error.details[0].message })
   }
   const email = req.body.email;
   const password = req.body.password;
