@@ -74,8 +74,8 @@ this.props.loginUser(userData); // since we handle the redirect within our compo
             </div>
             <div>
             <label class="block pl-12 text-2xl text-gray-700 text-sm mb-2" for="username">
-                    Sign in
-                  </label>
+              Sign in
+            </label>
             </div>
             <div className="px-12">
               <form noValidate onSubmit={this.onSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
