@@ -57,7 +57,7 @@ this.props.loginUser(userData); // since we handle the redirect within our compo
     const { errors } = this.state;
 
     return (
-        <div style={bgImage} className="bg-indigo-900 bg-cover h-screen w-screen grid grid-cols-12">
+        <div style={bgImage} className="bg-cover h-screen w-screen grid grid-cols-12">
           <div className="flex col-start-1 col-end-5 items-center">
             <div className="flex bg-gray-800 bg-opacity-95 rounded-md w-full h-56 justify-center items-center border-white">
               <div className="grid gap-y-4 p-4 text-4xl text-gray-100 truncate">

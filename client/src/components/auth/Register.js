@@ -62,26 +62,26 @@ render() {
   return (
     <div style={bgImage} className="bg-tower-hall bg-cover h-screen w-screen grid grid-cols-12">
       <div className="flex col-start-1 col-end-5 items-center">
-        <div className="flex bg-blue-900 w-full h-56 justify-center items-center border border-opacity-80 border-white">
-          <div className="grid gap-y-4 p-4 text-3xl text-white truncate">
-            <h1><b className="text-green-300">Better</b> Community.</h1>
-            <h1><b className="text-green-300">Better</b> Education.</h1>
-            <p className="text-sm">Register and get virtually connected to your school's resources.</p>
+        <div className="flex bg-gray-800 bg-opacity-95 rounded-md w-full h-56 justify-center items-center border-white">
+          <div className="grid gap-y-4 p-4 text-4xl text-gray-100 truncate">
+            <h1><b className="text-green-500">Better</b> Community.</h1>
+            <h1><b className="text-green-500">Better</b> Education.</h1>
+            <p className="text-sm">Register now and get virtually connected to your school's resources.</p>
           </div>
         </div>
       </div>
-      <div className="flex flex-col relative justify-center col-start-10 col-end-13 bg-gray-50">
-        <div className="absolute top-0 right-1/4 text-6xl items-center">
+      <div className="flex flex-col relative justify-center col-start-10 col-end-13 bg-gray-800">
+        <div className="absolute top-4 right-1/4 text-6xl items-center">
           <h1 className="inline text-green-300">SAV</h1>
-          <h1 className="inline text-blue-900">NAC</h1>
+          <h1 className="inline text-white">NAC</h1>
         </div>
-        <label class="block pl-12 text-2xl text-gray-700 text-sm mb-2" for="username">
+        <label class="block pl-12 pb-4 text-2xl text-gray-200 text-sm mb-2" for="username">
           Register
         </label>
         <div className="px-12">
-          <form noValidate onSubmit={this.onSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+          <form noValidate onSubmit={this.onSubmit} className="">
             <div className="mb-4">
-              <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+              <label class="block text-gray-300 text-sm font-bold mb-2" for="username">
                 Name
               </label>
               <input
@@ -100,7 +100,7 @@ render() {
                 </span>
             </div>
             <div className="mb-4">
-              <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+              <label class="block text-gray-300 text-sm font-bold mb-2" for="username">
                 Email
               </label>
               <input
@@ -119,7 +119,7 @@ render() {
                 </span>
             </div>
             <div className="mb-4">
-              <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+              <label class="block text-gray-300 text-sm font-bold mb-2" for="username">
                 Password
               </label>
               <input
@@ -138,7 +138,7 @@ render() {
                 </span>
             </div>
             <div className="mb-4">
-              <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+              <label class="block text-gray-300 text-sm font-bold mb-2" for="username">
                 Confirm Password
               </label>
               <input
@@ -164,9 +164,11 @@ render() {
               </button>
             </div>
           </form>
-          <Link to="/" className="btn">
-            Back to login
-          </Link>
+          <div className="flex justify-center mt-4 text-blue-600">
+            <Link to="/" className="btn">
+              Back to login
+            </Link>
+          </div>
         </div>
       </div>
     </div>
