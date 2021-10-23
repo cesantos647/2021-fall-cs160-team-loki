@@ -13,6 +13,7 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
+import Assignments from "./components/course/Assignments";
 import "tailwindcss/tailwind.css"
 
 // Check for token to keep user logged in
@@ -41,12 +42,15 @@ class App extends Component {
       <Provider store={store}>
       <Router>
         <div className="App">
-          <Navbar />
-          <Route exact path="/" component={Landing} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/login" component={Login} />
           <Switch>
+            <Route exact path="/" component={Landing} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
+            <div>
+              <Navbar />
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              <PrivateRoute exact path="/assignments" component={Assignments} /> 
+            </div>
           </Switch>
         </div>
       </Router>
