@@ -3,7 +3,11 @@ module.exports = {
   purge: [],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: (theme) => ({
+        'tower-hall': "url('/towerhall.jpg')",
+      }),
+    },
   },
   variants: {},
   plugins: [],
