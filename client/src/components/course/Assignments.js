@@ -8,9 +8,38 @@ class Assignments extends Component {
     var ass_data = null;
     var isRowLayout = true;
     return (
-      /** Setting the div to flex will change the layout from rows to columns. */
+      /** Radio buttons currently inoperational, don't think we have Tailwind 2.2 installed yet (for easier implementation)*/
+      /** isRowLayout is used to set the assignments to column view, rather than row view. To test, change value to false. */
       <div class="flex ml-16">
         <div class={`bg-gray-800 w-screen h-screen ml-1 ${isRowLayout ? 'grid' : 'flex'}`}>
+          <div class="flex m-4 justify-end">
+            <div class="ml-4">
+              <div class="bg-gray-200 rounded-lg">
+                <div class="inline-flex rounded-lg">
+                  <input type="radio" name="view_type" id="rowView" checked hidden />
+                  <label for="rowView" class="label-checked:bg-green-400 radio text-center self-center py-2 px-4 rounded-lg cursor-pointer hover:text-green-500">Row View</label>
+                </div>
+                <div class="inline-flex rounded-lg">
+                  <input type="radio" name="view_type" id="colView" hidden />
+                  <label for="colView" class="label-checked:bg-green-400 radio text-center self-center py-2 px-4 rounded-lg cursor-pointer hover:text-green-500">Col. View</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="ml-4">
+              <div class="bg-gray-200 rounded-lg">
+                <div class="inline-flex rounded-lg">
+                  <input type="radio" name="sort_type" id="dateSort" checked hidden />
+                  <label for="dateSort" class="label-checked:bg-green-400 radio text-center self-center py-2 px-4 rounded-lg cursor-pointer hover:text-green-500">Date Sort</label>
+                </div>
+                <div class="inline-flex rounded-lg">
+                  <input type="radio" name="sort_type" id="typeSort" hidden />
+                  <label for="typeSort" class="label-checked:bg-green-400 radio text-center self-center py-2 px-4 rounded-lg cursor-pointer hover:text-green-500">Type Sort</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div class="border-t-4 border-yellow-400 bg-gray-800 p-4 mb-6" >
             <h1 class="pb-6 pt-2 px-2 text-xl text-yellow-400">Upcoming Assignments</h1>
             <ul class="border-4 border-opacity-25 border-gray-600">

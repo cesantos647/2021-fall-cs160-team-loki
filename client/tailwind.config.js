@@ -32,7 +32,10 @@ module.exports = {
       fontFamily: {
         text: ["Segoe UI"],
         header: ["Montserrat"],
-      }
+      },
+      backgroundImage: (theme) => ({
+        'tower-hall': "url('/towerhall.jpg')",
+      }),
     },
   },
   variants: {},

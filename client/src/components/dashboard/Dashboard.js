@@ -13,14 +13,16 @@ render() {
     const { user } = this.props.auth;
 
 return (
-      <div style={{ height: "75vh" }} className="container valign-wrapper">
-        <div className="row">
-          <div className="col s12 center-align">
+      <div className="w-screen h-screen bg-gray-800 center">
+        <div className="ml-20 row">
+          <div className="col s12">
             <h4>
-              <b>Hey there,</b> {user.name.split(" ")[0]}
-              <p className="flow-text grey-text text-darken-1">
-                You are logged into a full-stack{" "}
-                <span style={{ fontFamily: "monospace" }}>MERN</span> app 👏
+              <div className="text-green-400">Hey there,
+              <span className="font-bold text-yellow-300">{" " + user.name.split(" ")[0]}</span>
+              </div>
+              <p className="text-white flow-text grey-text">
+                You are currently on the dashboard. 
+                <span className="font-bold text-red-500"> (IN PROGRESS)</span>
               </p>
             </h4>
             <button
@@ -31,9 +33,8 @@ return (
                 marginTop: "1rem"
               }}
               onClick={this.onLogoutClick}
-              className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-            >
-              Logout
+              className="bg-blue-800 rounded-lg hover:bg-red-500">
+                <h1 class="break-words p-1 text-normal text-center text-bold text-yellow-300 hover:text-white">Logout</h1>
             </button>
           </div>
         </div>

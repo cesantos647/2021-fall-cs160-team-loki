@@ -1,7 +1,14 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { logoutUser } from "../../actions/authActions";
 
 class Navbar extends Component {
+  onLogoutClick = e => {
+    e.preventDefault();
+    this.props.logoutUser();
+  };
+
   render() {
     return (
       <div class="bg-gray-700">
@@ -15,7 +22,6 @@ class Navbar extends Component {
                   alt="savnac logo" />
               </a>
             </div>
-
             <ul>
               <li class="hover:bg-yellow-400 hover:text-blue-900">
                 <a
@@ -109,6 +115,7 @@ class Navbar extends Component {
 
             <div class="mt-auto h-16 items-center w-full">
               <button
+                onClick={this.onLogoutClick}
                 class="h-16 flex justify-center items-center w-full focus:text-gray-100 hover:bg-yellow-400 focus:outline-none">
                 <svg
                   class="h-7 w-7 text-red-500"
@@ -135,7 +142,7 @@ class Navbar extends Component {
                   href="/assignments"
                   class="flex justify-center items-center	focus:text-gray-100">
                     <div class="h-14 w-14 m-1.5 rounded-lg border-4 border-double bg-indigo-500 border-blue-900 hover:border-green-300">
-                      <h1 class="break-words p-1 text-normal text-center text-bold text-yellow-300">CS 185C</h1>
+                      <h1 class="break-words px-1 text-normal text-center text-bold text-yellow-300">CS 185C</h1>
                     </div>
                 </a>
               </li>
@@ -144,7 +151,7 @@ class Navbar extends Component {
                   href="/assignments"
                   class="flex justify-center items-center	focus:text-gray-100">
                     <div class="h-14 w-14 m-1.5 rounded-lg border-4 border-double bg-pink-500 border-blue-900 hover:border-green-300">
-                      <h1 class="break-words p-1 text-normal text-center text-bold text-yellow-300">CS 146</h1>
+                      <h1 class="break-words px-1 text-normal text-center text-bold text-yellow-300">CS 146</h1>
                     </div>
                 </a>
               </li>
@@ -153,7 +160,7 @@ class Navbar extends Component {
                   href="/assignments"
                   class="flex justify-center items-center	focus:text-gray-100">
                     <div class="h-14 w-14 m-1.5 rounded-lg border-4 border-double bg-red-500 border-blue-900 hover:border-green-300">
-                      <h1 class="break-words p-1 text-normal text-center text-bold text-yellow-300">CS 134</h1>
+                      <h1 class="break-words px-1 text-normal text-center text-bold text-yellow-300">CS 134</h1>
                     </div>
                 </a>
               </li>
@@ -162,7 +169,7 @@ class Navbar extends Component {
                   href="/assignments"
                   class="flex justify-center items-center	focus:text-gray-100">
                     <div class="h-14 w-14 m-1.5 rounded-lg border-4 border-double bg-blue-500 border-blue-900 hover:border-green-300">
-                      <h1 class="break-words p-1 text-normal text-center text-bold text-yellow-300">CS 157A</h1>
+                      <h1 class="break-words px-1 text-normal text-center text-bold text-yellow-300">CS 157A</h1>
                     </div>
                 </a>
               </li>
@@ -171,7 +178,7 @@ class Navbar extends Component {
                   href="/assignments"
                   class="flex justify-center items-center	focus:text-gray-100">
                     <div class="h-14 w-14 m-1.5 rounded-lg border-4 bg-purple-500 border-green-300 hover:border-green-300">
-                      <h1 class="break-words p-1 text-normal text-center text-bold text-yellow-300">CS 160</h1>
+                      <h1 class="break-words px-1 text-normal text-center text-bold text-yellow-300">CS 160</h1>
                     </div>
                 </a>
               </li>
@@ -183,4 +190,16 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+Navbar.propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps,
+  { logoutUser }
+)(Navbar);

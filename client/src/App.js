@@ -8,7 +8,6 @@ import { Provider } from "react-redux";
 import store from "./store";
 
 import Navbar from "./components/layout/Navbar";
-import Landing from "./components/layout/Landing";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
@@ -32,7 +31,7 @@ if (localStorage.jwtToken) {
     // Logout user
     store.dispatch(logoutUser());
     // Redirect to login
-    window.location.href = "./login";
+    window.location.href = "./";
   }
 }
 
@@ -43,9 +42,8 @@ class App extends Component {
       <Router>
         <div className="App">
           <Switch>
-            <Route exact path="/" component={Landing} />
+            <Route exact path="/" component={Login} />
             <Route exact path="/register" component={Register} />
-            <Route exact path="/login" component={Login} />
             <div>
               <Navbar />
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
