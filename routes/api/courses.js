@@ -4,16 +4,16 @@ const Course = require("../../models/CourseModel")
 
 const validateCourseInput = require("../../validation/courseValidation");
 
-const { courseToObject } = require("../../lib/mongoToObject")
+const { courseAllDataToObject } = require("../../lib/mongo/coursesToObject")
 
 router.get("/:courseId", (req, res) => {
   if(!req.params.courseId) return res.status(400).json({ status: "failure", error: "missing courseId" })
   
   return Course.findOne({ _id: req.params.courseId })
     .then(course => {
-      return res.status(200).json({ status: "success", data: { course: courseToObject(course) } })
+      return res.status(200).json({ status: "success", data: { course: courseAllDataToObject(course) } })
     })
-    .catch(() => res.status(400).json({ status: "failure", error: "course not found" }))
+    .catch(() => res.status(404).json({ status: "failure", error: "course not found" }))
   
 })
 
@@ -37,9 +37,9 @@ router.put("/:courseId", (req, res) => {
 
   return Course.findByIdAndUpdate({ _id: req.params.courseId }, req.body, {new: true})
     .then(course => {
-      return res.status(200).json({ status: "success", data: { course: courseToObject(course) } })
+      return res.status(200).json({ status: "success", data: { course: courseAllDataToObject(course) } })
     })
-    .catch(() => res.status(400).json({ status: "failure", error: "course not found" }))
+    .catch(() => res.status(404).json({ status: "failure", error: "course not found" }))
   
 })
 
@@ -50,7 +50,7 @@ router.delete("/:courseId", (req, res) => {
     .then(() => {
       return res.status(200).json({ status: "success" })
     })
-    .catch(() => res.status(400).json({ status: "failure", error: "course not found" }))
+    .catch(() => res.status(404).json({ status: "failure", error: "course not found" }))
 })
 
 module.exports = router
