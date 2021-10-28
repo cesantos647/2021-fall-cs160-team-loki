@@ -1,12 +1,18 @@
 const express = require("express");
 const router = express.Router();
-const Course = require("../../models/CourseModel")
+const Course = require("../../models/CourseModel");
+const passport = require('passport')
+
+require('../../config/passport')
 
 const validateCourseInput = require("../../validation/courseValidation");
 
-const { courseAllDataToObject } = require("../../lib/mongo/coursesToObject")
+const { courseAllDataToObject } = require("../../lib/mongo/coursesToObject");
 
 router.get("/:courseId", (req, res) => {
+
+  console.log(req.user)
+  
   if(!req.params.courseId) return res.status(400).json({ status: "failure", error: "missing courseId" })
   
   return Course.findOne({ _id: req.params.courseId })
@@ -18,6 +24,7 @@ router.get("/:courseId", (req, res) => {
 })
 
 router.post("/", (req, res) => {
+
   const { data, error } = validateCourseInput.validate(req.body);
 
   if(error) return res.status(400).json({ status: "failure", error: err.details[0].message })
@@ -28,14 +35,17 @@ router.post("/", (req, res) => {
     .catch(err => res.status(400).json({ status: "failure", error: err.details[0].message }));
 });
 
-router.put("/:courseId", (req, res) => {
+router.put("/:courseId", passport.authenticate('jwt', {session: false}), (req, res) => {
+
+  console.log(req.user._id.toString())
+
   if(!req.params.courseId) return res.status(400).json({ status: "failure", error: "missing courseId" })
   
   const { data, error } = validateCourseInput.validate(req.body);
 
   if(error) return res.status(400).json({ status: "failure", error: err.details[0].message })
 
-  return Course.findByIdAndUpdate({ _id: req.params.courseId }, req.body, {new: true})
+  return Course.findOneAndUpdate({ _id: req.params.courseId, professorId: req.user._id.toString() }, req.body, {new: true})
     .then(course => {
       return res.status(200).json({ status: "success", data: { course: courseAllDataToObject(course) } })
     })
