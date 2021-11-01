@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Course = require("../../models/Chatroom")
+const Chatroom = require("../../models/Chatroom");
 
 const validateChatRoomInput = require("../../validation/chatroomValidation");
 
@@ -31,7 +31,7 @@ router.get("/:chatroomId", (req, res) => {
 
 //Add Chat To Chat Room
 //assumes both chat and chatroom are valid, will need to update later on
-router.post("/addChat/:chatroomId/:chatId", (req, res) => {
+router.post("/:chatroomId/:chatId", (req, res) => {
     if(!req.params.chatId || !req.params.chatRoomId) return res.status(400).json({status: "failure", error: "Missing chatId or chatroomId"});
 
     return Chatroom.findOneAndUpdate({_id: req.params.chatroomId}, {$push: {chats: req.params.chatId}})
