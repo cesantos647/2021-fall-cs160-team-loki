@@ -7,7 +7,7 @@ const AssignmentSchema = new Schema({
     type: String,
     required: true
   },
-  AssignmentDescription: {
+  assignmentDescription: {
     type: String,
     required: false
   },
