@@ -7,7 +7,7 @@ const validateChatInput = require("../../validation/chatValidation");
 const { chatAllDataToObject } = require("../../lib/mongo/chatsToObject");
 
 //Create Chat
-router.post("api/v1/chat/create/chat/new", (req, res) => {
+router.post("/chat", (req, res) => {
     const { data, error } = validateChatInput.validate(req.body);
 
     if(error) return res.status(400).json({status: "failure", error: err.details[0].message});
@@ -19,7 +19,7 @@ router.post("api/v1/chat/create/chat/new", (req, res) => {
 });
 
 //Get Chat Details
-router.get("api/v1/chat/get/chat/:chatId", (req, res) => {
+router.get("/:chatId", (req, res) => {
     if(!req.params.chatId) return res.status(400).json({status: "failure", error: "missing chatId"});
     return Chat.findOne({_id: req.params.chatId})
         .then(chat => {
@@ -31,12 +31,14 @@ router.get("api/v1/chat/get/chat/:chatId", (req, res) => {
 //Future tickets
 
 //Send Message
-router.get("api/v1/chat/update/chat/addmessage/:chatId", (req, res) => {
+router.get("/addmessage/:chatId", (req, res) => {
 
 });
 
 //Delete Message
 
-router.get("api/v1/chat/update/chat/delmessage/:chatId", (req, res) => {
+router.get("/delmessage/:chatId", (req, res) => {
 
 });
+
+module.exports = router
