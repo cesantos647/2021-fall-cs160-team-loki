@@ -7,8 +7,5 @@ module.exports = Joi.object({
   courseSection: Joi.string().required().messages({
     'any.required': 'courseSection is required'
   }),
-  professorId: Joi.string().required().messages({
-    'any.required': 'professorId is required'
-  }),
   courseColor: Joi.string()
 })
