@@ -5,7 +5,7 @@ const Chatroom = require("../../models/Chatroom");
 const validateChatRoomInput = require("../../validation/chatroomValidation");
 
 const { chatroomAllDataToObject } = require("../../lib/mongo/chatroomsToObject");
-const Chatroom = require("../../models/Chatroom");
+
 
 //Create Chat Room
 router.post("/chatroom", (req, res) => {

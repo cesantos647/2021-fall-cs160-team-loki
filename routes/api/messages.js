@@ -18,8 +18,8 @@ router.post("/:chatId", (req, res) => {
     const newMessage = new Message(req.body);
 
     return newMessage.save()
-    .then(message => res.status(200).json({ status: "success", data: { messageId: message._id.toString() } }))
-    .catch(err => res.status(400).json({status: "failure", error: err.details[0].message}));
+        .then(message => res.status(200).json({ status: "success", data: { messageId: message._id.toString() } }))
+        .catch(err => res.status(400).json({status: "failure", error: err.details[0].message}));
 })
 //Add Message to Chat
 //assumes both message and chat are valid, will need to update later on
