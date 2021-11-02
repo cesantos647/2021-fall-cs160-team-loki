@@ -5,6 +5,7 @@ const app = express();
 const passport = require("passport");
 const users = require("./routes/api/users");
 const courses = require("./routes/api/courses");
+const assignments = require('./routes/api/assignments')
 const chats = require("./routes/api/chats");
 const chatrooms = require("./routes/api/chatrooms");
 
@@ -34,6 +35,7 @@ require("./config/passport")(passport);
 // Routes
 app.use("/api/users", users);
 app.use("/api/courses", courses);
+app.use("/api/assignments", assignments);
 app.use("/api/chats", chats);
 app.use("/api/chatrooms", chatrooms);
 
