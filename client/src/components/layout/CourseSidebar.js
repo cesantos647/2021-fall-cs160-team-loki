@@ -1,0 +1,159 @@
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { logoutUser } from "../../actions/authActions";
+
+class CourseSidebar extends Component {
+  onLogoutClick = e => {
+    e.preventDefault();
+    this.props.logoutUser();
+  };
+
+  constructor(props) {
+    super(props);
+    this.state = { showSidebar: false }
+    this.handleSidebarToggle = this.handleSidebarToggle.bind(this);
+  }
+
+  handleSidebarToggle() {
+    this.setState(prevState => ({
+      showSidebar: !prevState.showSidebar
+    }));
+  }
+
+  render() {
+    return (
+      <div class="ml-12 fixed items-center h-screen w-screen flex z-40">
+        <Sidebar sidebar={this.state.showSidebar} />
+        <aside class="flex items-center">
+          <button onClick={this.handleSidebarToggle} class="ml-0 fixed block h-10 w-10 rounded-full overflow-hidden border-2 border-gray-700 text-gray-700 bg-gray-900 hover:border-yellow-200">
+            {
+              this.state.showSidebar ?
+                <svg
+                  class="h-7 w-6"
+                  viewBox="0 0 12 20"
+                  fill="yellow"
+                  stroke="currentColor"
+                  stroke-width="0.5">
+                  <path d="M8.388,10.049l4.76-4.873c0.303-0.31,0.297-0.804-0.012-1.105c-0.309-0.304-0.803-0.293-1.105,0.012L6.726,9.516c-0.303,0.31-0.296,0.805,0.012,1.105l5.433,5.307c0.152,0.148,0.35,0.223,0.547,0.223c0.203,0,0.406-0.08,0.559-0.236c0.303-0.309,0.295-0.803-0.012-1.104L8.388,10.049z"></path>
+                </svg> :
+                <svg
+                  class="h-7 w-6"
+                  viewBox="0 0 10 20"
+                  fill="yellow"
+                  stroke="currentColor"
+                  stroke-width="0.5">
+                  <path d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
+                </svg>
+            }
+          </button>
+        </aside>
+      </div >
+    );
+  }
+}
+
+function Sidebar(props) {
+  if (!props.sidebar) {
+    return null;
+  }
+
+  return (
+    <aside class="mx-5 fixed grid grid-rows-2 border-l-2 border-r-2 border-gray-700 bg-gray-900 text-yellow-200 shadow h-full">
+      <div class="flex-col font-extralight font-sans">
+        <aside class="flex justify-center">
+          <button class="mx-0 fixed block mt-5 h-10 w-10 rounded-full overflow-hidden border-2 border-gray-700 text-gray-900 bg-yellow-200 hover:text-yellow-200 hover:bg-gray-900">
+            <svg
+              class="h-6 w-8"
+              viewBox="0 0 20 26"
+              stroke="currentColor"
+              stroke-width="1"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <path
+                fill="#111827"
+                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1
+                    0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0
+                    0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2
+                    2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0
+                    0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1
+                    0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0
+                    0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65
+                    0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0
+                    1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0
+                    1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2
+                    0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0
+                    1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0
+                    2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0
+                    0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65
+                    1.65 0 0 0-1.51 1z"></path>
+              <circle fill="#FDE68A" cx="12" cy="12" r="3"></circle>
+            </svg>
+          </button>
+        </aside>
+        <div class="h-10 border-b-2 border-gray-700 bg-yellow-200"></div>
+        <ul class="px-4 pt-6">
+          <li class="py-2">
+            <a
+              href="/modules"
+              class="focus:text-gray-200 hover:text-green-300 hover:text-lg">
+              MODULES
+            </a>
+          </li>
+          <li class="py-2">
+            <a
+              href="/announcements"
+              class="focus:text-gray-200 hover:text-green-300">
+              ANNOUNCEMENTS
+            </a>
+          </li>
+          <li class="py-2">
+            <a
+              href="/assignments"
+              class="focus:text-gray-200 hover:text-green-300">
+              ASSIGNMENTS
+            </a>
+          </li>
+          <li class="py-2">
+            <a
+              href="/grades"
+              class="focus:text-gray-200 hover:text-green-300">
+              GRADES
+            </a>
+          </li>
+          <li class="py-2">
+            <a
+              href="/files"
+              class="focus:text-gray-200 hover:text-green-300">
+              FILES
+            </a>
+          </li>
+          <li class="py-2">
+            <a
+              href="/syllabus"
+              class="focus:text-gray-200 hover:text-green-300">
+              SYLLABUS
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="flex-col font-extralight font-sans border-t-2 border-gray-700">
+      </div>
+    </aside>
+  )
+}
+
+CourseSidebar.propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps,
+  { logoutUser }
+)(CourseSidebar);

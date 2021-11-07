@@ -12,7 +12,7 @@ class Navbar extends Component {
   render() {
     return (
       <div class="bg-gray-700">
-        <aside class="grid grid-rows-1 bg-blue-900 text-yellow-400 shadow h-full fixed z-50">
+        <aside class="grid grid-rows-1 border-r-2 bg-blue-900 text-yellow-400 border-gray-700 shadow h-full fixed z-30">
           <div class="flex-col">
             <div class="h-16 flex items-center w-full">
               <a class="mx-auto">
@@ -139,7 +139,7 @@ class Navbar extends Component {
             <ul>
               <li class="">
                 <a
-                  href="/assignments"
+                  href="/chat"
                   class="flex justify-center items-center	focus:text-gray-100">
                     <div class="h-14 w-14 m-1.5 rounded-lg border-4 border-double bg-indigo-500 border-blue-900 hover:border-green-300">
                       <h1 class="break-words px-1 text-normal text-center text-bold text-yellow-300">CS 185C</h1>
@@ -148,7 +148,7 @@ class Navbar extends Component {
               </li>
               <li class="">
                 <a
-                  href="/assignments"
+                  href="/chat"
                   class="flex justify-center items-center	focus:text-gray-100">
                     <div class="h-14 w-14 m-1.5 rounded-lg border-4 border-double bg-pink-500 border-blue-900 hover:border-green-300">
                       <h1 class="break-words px-1 text-normal text-center text-bold text-yellow-300">CS 146</h1>
@@ -157,7 +157,7 @@ class Navbar extends Component {
               </li>
               <li class="">
                 <a
-                  href="/assignments"
+                  href="/chat"
                   class="flex justify-center items-center	focus:text-gray-100">
                     <div class="h-14 w-14 m-1.5 rounded-lg border-4 border-double bg-red-500 border-blue-900 hover:border-green-300">
                       <h1 class="break-words px-1 text-normal text-center text-bold text-yellow-300">CS 134</h1>
@@ -166,7 +166,7 @@ class Navbar extends Component {
               </li>
               <li class="">
                 <a
-                  href="/assignments"
+                  href="/chat"
                   class="flex justify-center items-center	focus:text-gray-100">
                     <div class="h-14 w-14 m-1.5 rounded-lg border-4 border-double bg-blue-500 border-blue-900 hover:border-green-300">
                       <h1 class="break-words px-1 text-normal text-center text-bold text-yellow-300">CS 157A</h1>
@@ -175,7 +175,7 @@ class Navbar extends Component {
               </li>
               <li class="">
                 <a
-                  href="/assignments"
+                  href="/chat"
                   class="flex justify-center items-center	focus:text-gray-100">
                     <div class="h-14 w-14 m-1.5 rounded-lg border-4 bg-purple-500 border-green-300 hover:border-green-300">
                       <h1 class="break-words px-1 text-normal text-center text-bold text-yellow-300">CS 160</h1>
