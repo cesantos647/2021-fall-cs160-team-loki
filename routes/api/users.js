@@ -17,7 +17,6 @@ router.post("/register", (req, res) => {
   const { data, error } = validateRegisterInput.validate(req.body);
   // Check validation
   if (error) {
-    console.log(error);
     if (error.message.startsWith('Name')) {
       return res.status(400).json({ nameinputerror: error.details[0].message });
     } else if (error.message.startsWith('Email')) {
