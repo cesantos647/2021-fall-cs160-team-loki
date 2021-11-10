@@ -31,7 +31,7 @@ class Assignments extends Component {
           <div class="border-t-4 border-yellow-400 p-4 mb-6" >
             <h1 class="pb-6 pt-2 px-2 text-xl text-yellow-400">Upcoming Assignments</h1>
             <ul class="border-4 border-opacity-25 border-gray-600">
-              <div class="box-content border-2 border-t-0 border-opacity-50 border-green-300 bg-gray-700 p-4 flex hover:opacity-70">
+              <div class="box-content border-2 border-t-0 border-opacity-50 border-green-400 bg-gray-700 p-4 flex hover:opacity-70">
                 <div class="text-left pt-2 flex-1">
                   <p class="text-gray-100 text-lg font-semibold">Assignment 2</p>
                   <p class="text-green-400 text-md pt-1">Submitted</p>
@@ -66,17 +66,17 @@ class Assignments extends Component {
           <div class="border-t-4 border-yellow-400 p-4 mb-6" >
             <h1 class="pb-6 pt-2 px-2 text-xl text-yellow-400">Past Assignments</h1>
             <ul class="border-4 border-opacity-25 border-gray-600">
-              <div class="box-content border-2 border-t-0 border-opacity-50 border-green-300 bg-gray-700 p-4 flex hover:opacity-70">
+              <div class="box-content border-2 border-t-0 border-opacity-50 border-green-400 bg-gray-700 p-4 flex hover:opacity-70">
                 <div class="text-left pt-2 flex-1">
                   <p class="text-gray-100 text-lg font-semibold">Assignment 1</p>
-                  <p class="text-green-400 text-md pt-1">30/40</p>
+                  <p class="text-green-400 text-md pt-1 font-bold">30/40</p>
                 </div>
                 <div class="text-right text-sm pt-3 flex-1">
                   <p class="text-pink-400 font-semibold">10/15/2021</p>
                   <p class="text-gray-400 pt-0.5">10/22/2021</p>
                 </div>
               </div>
-              <div class="box-content border-2 border-t-0 border-opacity-50 border-green-300 bg-gray-700 p-4 flex hover:opacity-70">
+              <div class="box-content border-2 border-t-0 border-opacity-50 border-green-400 bg-gray-700 p-4 flex hover:opacity-70">
                 <div class="text-left pt-2 flex-1">
                   <p class="text-gray-100 text-lg font-semibold">Quiz 1</p>
                   <p class="text-green-400 text-md pt-1 font-bold">25/40</p>
@@ -102,16 +102,8 @@ class Assignments extends Component {
           <div class="border-t-4 border-yellow-400 p-4 mb-6" >
             <h1 class="pb-6 pt-2 px-2 text-xl text-yellow-400">Assignments from Database</h1>
             <ul class="border-4 border-opacity-25 border-gray-600">
-              <div class="box-content border-2 border-t-0 border-opacity-50 border-green-300 bg-gray-700 p-4 flex hover:opacity-70">
-                <div class="text-left pt-2 flex-1">
-                  <p class="text-gray-100 text-lg font-semibold">name</p>
-                  <p class="text-green-400 text-md pt-1">pts/total_pts</p>
-                </div>
-                <div class="text-right text-sm pt-3 flex-1">
-                  <p class="text-pink-400 font-semibold">due_date</p>
-                  <p class="text-gray-400 pt-0.5">close_date</p>
-                </div>
-              </div>
+              <AssignmentBtn name="New Assignment" issubmitted={true} isgraded={true} duedate="11/1/2021" closedate="11/7/2021" pts="90" posspts="100" />
+              <AssignmentBtn name="New Assignment" issubmitted={false} isgraded={true} duedate="11/1/2021" closedate="11/7/2021" pts="0" posspts="100" />
             </ul>
           </div>
         </div>
@@ -120,6 +112,25 @@ class Assignments extends Component {
   }
 }
 
+function AssignmentBtn(props) {
+  return (
+    <div class={`box-content border-2 border-t-0 border-opacity-50 ${props.issubmitted ? "border-green-400" : "border-red-400"} bg-gray-700 p-4 flex hover:opacity-70`}>
+      <div class="text-left pt-2 flex-1">
+        <p class="text-gray-100 text-lg font-semibold">{props.name}</p>
+        <div class={`text-md ${props.issubmitted ? "text-green-400" : "text-red-400"} pt-1`}>
+          {props.isgraded ?
+            <p class="font-bold">{props.pts + "/" + props.posspts}</p> :
+            <p>{props.issubmitted ? "Submitted" : "No Submission"}</p>
+          }
+        </div>
+      </div>
+      <div class="text-right text-sm pt-3 flex-1">
+        <p class="text-pink-400 font-semibold">{props.duedate}</p>
+        <p class="text-gray-400 pt-0.5">{props.closedate}</p>
+      </div>
+    </div>
+  )
+}
 
 Assignments.propTypes = {
   logoutUser: PropTypes.func.isRequired,

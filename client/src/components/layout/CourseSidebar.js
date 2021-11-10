@@ -23,10 +23,10 @@ class CourseSidebar extends Component {
 
   render() {
     return (
-      <div class="ml-12 fixed items-center h-screen w-screen flex z-40">
+      <div class="ml-12 fixed items-center align-middle z-40">
         <Sidebar sidebar={this.state.showSidebar} />
-        <aside class="flex items-center">
-          <button onClick={this.handleSidebarToggle} class="ml-0 fixed block h-10 w-10 rounded-full overflow-hidden border-2 border-gray-700 text-gray-700 bg-gray-900 hover:border-yellow-200">
+        <aside class="flex items-center align-middle h-screen">
+          <button onClick={this.handleSidebarToggle} class="fixed block h-10 w-10 rounded-full overflow-hidden border-2 border-gray-700 text-gray-700 bg-gray-900 hover:border-yellow-200">
             {
               this.state.showSidebar ?
                 <svg
@@ -93,54 +93,30 @@ function Sidebar(props) {
         </aside>
         <div class="h-10 border-b-2 border-gray-700 bg-yellow-200"></div>
         <ul class="px-4 pt-6">
-          <li class="py-2">
-            <a
-              href="/modules"
-              class="focus:text-gray-200 hover:text-green-300 hover:text-lg">
-              MODULES
-            </a>
-          </li>
-          <li class="py-2">
-            <a
-              href="/announcements"
-              class="focus:text-gray-200 hover:text-green-300">
-              ANNOUNCEMENTS
-            </a>
-          </li>
-          <li class="py-2">
-            <a
-              href="/assignments"
-              class="focus:text-gray-200 hover:text-green-300">
-              ASSIGNMENTS
-            </a>
-          </li>
-          <li class="py-2">
-            <a
-              href="/grades"
-              class="focus:text-gray-200 hover:text-green-300">
-              GRADES
-            </a>
-          </li>
-          <li class="py-2">
-            <a
-              href="/files"
-              class="focus:text-gray-200 hover:text-green-300">
-              FILES
-            </a>
-          </li>
-          <li class="py-2">
-            <a
-              href="/syllabus"
-              class="focus:text-gray-200 hover:text-green-300">
-              SYLLABUS
-            </a>
-          </li>
+          <SidebarLink name="Modules" url="/modules" />
+          <SidebarLink name="Announcements" url="/announcements"/>
+          <SidebarLink name="Assignments" url="/assignments" />
+          <SidebarLink name="Grades" url="/grades" />
+          <SidebarLink name="Files" url="/files" />
+          <SidebarLink name="Syllabus" url="/syllabus" />
         </ul>
       </div>
 
       <div class="flex-col font-extralight font-sans border-t-2 border-gray-700">
       </div>
     </aside>
+  )
+}
+
+function SidebarLink(props) {
+  return (
+    <li class="py-2">
+    <a
+      href={`${props.url}`}
+      class="focus:text-gray-200 hover:text-green-300">
+      {props.name}
+    </a>
+  </li>
   )
 }
 
