@@ -2,9 +2,34 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import classnames from "classnames";
+import { getCourseDetails } from "../../actions/courseActions";
 
 class Assignments extends Component {
+  constructor() {
+    super();
+    this.state = {
+      courseId: "",
+      course: {},
+      errors: {}
+    }
+  }
+
+  onChange = e => {
+    this.setState({ [e.target.id]: e.target.value });
+  };
+  
+  onSubmit = async e => {
+    e.preventDefault();
+
+    const response = await getCourseDetails(this.state.courseId)
+    this.setState({ course: response })
+    console.log(response)
+    console.log(this.state.course)
+  }
   render() {
+    const { errors } = this.state;
+
     var ass_data = null;
     var isRowLayout = true;
     return (
@@ -26,6 +51,31 @@ class Assignments extends Component {
             </div>
           </div>
         </div>
+        <form noValidate onSubmit={this.onSubmit}>
+          <div className="mb-4">
+            <label class="block text-gray-300 text-sm font-bold mb-2" for="username">
+              CourseId
+            </label>
+            <input
+              onChange={this.onChange}
+              value={this.state.email}
+              error={errors.email}
+              id="courseId"
+              type="courseId"
+              className={classnames("shadow appearance-none border bg-gray-200 focus:bg-white rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", {
+                invalid: errors.email || errors.emailnotfound
+              })}
+            />
+            <span className="text-xs italic text-red-500">
+              {errors.email}
+              {errors.emailnotfound}
+              {errors.emailinputerror}
+            </span>
+          </div>
+        </form>
+        <p>
+          { this.state.course.courseName || "" }
+        </p>
 
         <div class={`ml-1 ${isRowLayout ? 'grid' : 'flex'}`}>
           <div class="border-t-4 border-yellow-400 p-4 mb-6" >
