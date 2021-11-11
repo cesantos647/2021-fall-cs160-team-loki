@@ -33,8 +33,8 @@ return (
           <div className="col s12">
             <h4>
               <div className="text-green-400">Hey there,
-              <span className="font-bold text-yellow-300">{" " + user.name.split(" ")[0]}</span>
-              <span className="font-bold text-yellow-300">{" " + state.email}</span>
+              <span className="font-bold text-yellow-300">{" " + user.name.split(" ")[0] }</span>
+              <span className="font-bold text-yellow-300">{" " + state.email }</span>
               </div>
               <p className="text-white flow-text grey-text">
                 You are currently on the dashboard. 

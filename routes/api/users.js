@@ -8,6 +8,7 @@ const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
 // Load User model
 const User = require("../../models/User");
+const { userAllDataToObject } = require('../../lib/mongo/usersToObject');
 
 // @route POST api/users/register
 // @desc Register user
@@ -103,6 +104,17 @@ router.post("/login", (req, res) => {
       }
     });
   });
+});
+
+router.get('/:userID', (req, res) => {
+  
+  if(!req.params.userID) return res.status(400).json({ status: "failure", error: "missing userID" })
+
+  return User.findOne({ _id: req.params.userID })
+    .then(user => {
+      return res.status(200).json({ status: "success", data: userAllDataToObject(user) })
+    })
+    .catch(() => res.status(404).json({ status: "failure", error: "user not found"}))
 });
 
 module.exports = router;
