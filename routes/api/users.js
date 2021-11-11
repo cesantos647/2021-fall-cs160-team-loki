@@ -108,6 +108,7 @@ router.post("/login", (req, res) => {
   });
 });
 
+// Get user from user ID
 router.get('/:userID', (req, res) => {
   
   if(!req.params.userID) return res.status(400).json({ status: "failure", error: "missing userID" })
