@@ -25,6 +25,7 @@ class Dashboard extends Component {
 
 render() {
     const { user } = this.props.auth;
+    const { state } = this.props.location;
 
 return (
       <div className="w-screen h-screen bg-gray-800 center">
@@ -33,6 +34,7 @@ return (
             <h4>
               <div className="text-green-400">Hey there,
               <span className="font-bold text-yellow-300">{" " + user.name.split(" ")[0]}</span>
+              <span className="font-bold text-yellow-300">{" " + state.email}</span>
               </div>
               <p className="text-white flow-text grey-text">
                 You are currently on the dashboard. 
