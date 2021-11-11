@@ -28,11 +28,7 @@ class Login extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
-      const data = { email: this.state.email };
-      this.props.history.push({   // push user to dashboard when authenticated
-        pathname: "/dashboard",
-        state: data    // pass email in as temporary student ID
-      })
+      this.props.history.push("/dashboard");  // push user to dashboard when they login
     }
 
     if (nextProps.errors) {
