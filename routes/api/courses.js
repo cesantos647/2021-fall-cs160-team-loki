@@ -92,7 +92,7 @@ router.put("/:courseId/:studentId", passport.authenticate('jwt', {session: false
   const studentId = req.params.studentId;
   const courseId = req.params.courseId;
 
-  await User.findById(studentId, (err, student)=> {   // Check if student exists
+  return await User.findById(studentId, (err, student)=> {   // Check if student exists
     if (!student) {
       return res.status(404).json({ 
         status: "failure", 
@@ -106,9 +106,10 @@ router.put("/:courseId/:studentId", passport.authenticate('jwt', {session: false
           status: "success", 
           data: courseAllDataToObject(updatedStudent)
         })
-      });
+      })
     }
   })
+  
 });
 
 // Remove a student from a course
@@ -126,28 +127,14 @@ router.put("/:courseId/delete/:studentId", passport.authenticate('jwt', {session
   const studentId = req.params.studentId;
   const courseId = req.params.courseId;
 
-  await User.findById(studentId, (err, student)=> {   // Check if student exists
+  return await User.findById(studentId, (err, student)=> {   // Check if student exists
     if (!student) {
       return res.status(404).json({ 
         status: "failure", 
         error: "student not found" 
       });
     } else {
-      return Course.findById(courseId, (err, course)=> {    // find course
-        var i = course.studentIds.indexOf(studentId);
-        if (!i) {
-          course.studentIds.splice(i, 1);
-          course.save();
-          res.status(200).json({
-            status: "success"
-          });
-        } else {
-          res.status(404).json({
-            status: "failure",
-            error: "student not found in course"
-          });
-        }
-      });
+      Course.findByIdAndUpdate( {courseId}, {$pull : { 'studentIds': studentId } });
     }
   });
 });
