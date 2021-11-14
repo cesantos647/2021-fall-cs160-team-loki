@@ -8,7 +8,8 @@
     "start": "node server.js",
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -34,6 +35,12 @@
     "validator": "^13.6.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.12"
+    "babel-cli": "^6.26.0",
+    "babel-jest": "^26.6.0",
+    "babel-preset-env": "^1.7.0",
+    "jest": "26.6.0",
+    "nodemon": "^2.0.12",
+    "superagent": "^6.1.0",
+    "supertest": "^6.1.6"
   }
 }
