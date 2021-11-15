@@ -2,20 +2,24 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
-import { getCourseDetails } from "../../actions/courseActions";
+import { getUser } from "../../actions/authActions";
 
 class Dashboard extends Component {
   constructor() {
     super();
     this.state = {
       courseId: "",
-      course: {},
+      courses: [],
       errors: {}
     }
   }
   
-  componentDidMount() {
-    console.log(this.props);
+  async componentDidMount() {
+    const userId = await this.props.auth.user.id
+    const response = await getUser(userId)
+    this.setState({ courses: response })
+    console.log(response)
+    console.log(this.state.courses)
   }
 
   onLogoutClick = e => {
