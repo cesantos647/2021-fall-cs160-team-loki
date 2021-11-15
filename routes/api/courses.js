@@ -99,6 +99,8 @@ router.put("/:courseId/:studentId", passport.authenticate('jwt', {session: false
         error: "student not found" 
       })
     } else {
+      student.courseIDs.push(courseId);
+      student.save();
       return Course.findById(courseId, (err, updatedStudent)=> {  // Add studentID to list of studentIDs in course
         updatedStudent.studentIds.push(studentId);
         updatedStudent.save()

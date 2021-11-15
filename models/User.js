@@ -14,11 +14,11 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
-  courseIDs: {
+  courseIds: {
     type: [String],
     required: false
   },
-  chatIDs: {
+  chatIds: {
     type: [String],
     required: false
   },
