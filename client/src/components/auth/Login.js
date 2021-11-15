@@ -74,7 +74,7 @@ class Login extends Component {
           </div>
           <div className="my-auto">
             <div>
-              <label class="block pl-12 pb-4 text-2xl text-gray-200 text-sm mb-2" for="username">
+              <label class="block pl-12 pb-4 text-2xl text-gray-200 mb-2" for="username">
                 Sign in
               </label>
             </div>
