@@ -4,10 +4,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 class Assignments extends Component {
-  onLogoutClick = e => {
-    e.preventDefault();
-    this.props.logoutUser();
-  };
 
   constructor(props) {
     super(props);
@@ -146,15 +142,6 @@ function AssignmentBtn(props) {
     </div>
   )
 }
-
-Assignments.propTypes = {
-  logoutUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
-};
-
-const mapStateToProps = state => ({
-  auth: state.auth
-});
 
 export default connect(
 )(Assignments);

@@ -4,10 +4,6 @@ import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 
 class CourseSidebar extends Component {
-  onLogoutClick = e => {
-    e.preventDefault();
-    this.props.logoutUser();
-  };
 
   constructor(props) {
     super(props);
@@ -158,16 +154,5 @@ function CourseChatLink(props) {
   )
 }
 
-CourseSidebar.propTypes = {
-  logoutUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
-};
-
-const mapStateToProps = state => ({
-  auth: state.auth
-});
-
 export default connect(
-  mapStateToProps,
-  { logoutUser }
 )(CourseSidebar);
