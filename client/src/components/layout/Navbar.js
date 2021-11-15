@@ -57,9 +57,9 @@ class Navbar extends Component {
             <div class="mt-auto h-16 items-center w-full">
               <button
                 onClick={this.onLogoutClick}
-                class="h-16 flex justify-center items-center w-full focus:text-gray-100 hover:bg-yellow-400 focus:outline-none">
+                class="h-16 flex justify-center items-center w-full hover:bg-yellow-400 focus:outline-none">
                 <svg 
-                  class="h-7 w-7 text-red-500" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path> <polyline points="16 17 21 12 16 7"></polyline> <line x1="21" y1="12" x2="9" y2="12"></line>
+                  class="h-7 w-7 text-red-500 focus:text-gray-100" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path> <polyline points="16 17 21 12 16 7"></polyline> <line x1="21" y1="12" x2="9" y2="12"></line>
                 </svg>
               </button>
             </div>
@@ -74,9 +74,9 @@ class Navbar extends Component {
               <li class="">
                 <a
                   href="/chat"
-                  class="flex justify-center items-center	focus:text-gray-100">
-                  <div class="h-14 w-14 m-1.5 rounded-lg border-4 bg-purple-500 border-green-300 hover:border-green-300">
-                    <h1 class="break-words px-1 text-normal text-center text-bold text-yellow-300">CS 160</h1>
+                  class="flex justify-center items-center	">
+                  <div class="h-14 w-14 m-1.5 rounded-lg border-4 bg-purple-500 border-green-300 hover:border-green-300 focus:border-white-100">
+                    <h1 class="break-words px-1 text-normal text-center text-bold text-yellow-300 focus:text-gray-100">CS 160</h1>
                   </div>
                 </a>
               </li>
@@ -105,9 +105,9 @@ function CourseBtn(props) {
     <li class="">
       <a
         href="/chat"
-        class="flex justify-center items-center	focus:text-gray-100">
-        <div class={`h-14 w-14 m-1.5 rounded-lg border-4 border-double ${props.bgcolor} border-blue-900 hover:border-green-300`}>
-          <h1 class="break-words px-1 text-normal text-center text-bold text-yellow-300">{props.coursename}</h1>
+        class="flex justify-center items-center">
+        <div class={`h-14 w-14 m-1.5 rounded-lg border-4 border-double ${props.bgcolor} border-blue-900 hover:border-green-300 focus:border-gray-100`}>
+          <h1 class="break-words px-1 text-normal text-center text-bold text-yellow-300 focus:text-gray-100">{props.coursename}</h1>
         </div>
       </a>
     </li>

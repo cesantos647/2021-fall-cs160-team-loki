@@ -59,20 +59,22 @@ function Sidebar(props) {
   }
 
   return (
-    <aside class="mx-5 fixed grid grid-rows-2 border-l-2 border-r-2 border-gray-700 bg-gray-900 text-yellow-200 shadow h-full">
-      <div class="flex-col font-extralight font-sans">
-        <aside class="flex justify-center">
-          <button class="mx-0 fixed block mt-5 h-10 w-10 rounded-full overflow-hidden border-2 border-gray-700 text-gray-900 bg-yellow-200 hover:text-yellow-200 hover:bg-gray-900">
-            <svg
-              class="h-6 w-8"
-              viewBox="0 0 20 26"
-              stroke="currentColor"
-              stroke-width="1"
-              stroke-linecap="round"
-              stroke-linejoin="round">
-              <path
-                fill="#111827"
-                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1
+    <aside class="mx-5 fixed border-l-2 border-r-2 border-gray-700 bg-gray-900 shadow h-screen">
+      <div class="h-full grid grid-flow-row grid-rows-2">
+        <div class="">
+          <div class="relative h-10 align-top border-b-2 border-gray-700 bg-gradient-to-r from-yellow-300 to-yellow-100">
+            <aside class="flex justify-center">
+              <button class="mx-0 relative block top-5 h-10 w-10 rounded-full overflow-hidden border-2 border-gray-700 text-gray-900 bg-yellow-200 hover:text-yellow-200 hover:bg-gray-900">
+                <svg
+                  class="h-6 w-8"
+                  viewBox="0 0 20 26"
+                  stroke="currentColor"
+                  stroke-width="1"
+                  stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path
+                    fill="#111827"
+                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1
                     0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0
                     0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2
                     2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0
@@ -87,36 +89,72 @@ function Sidebar(props) {
                     2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0
                     0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65
                     1.65 0 0 0-1.51 1z"></path>
-              <circle fill="#FDE68A" cx="12" cy="12" r="3"></circle>
-            </svg>
-          </button>
-        </aside>
-        <div class="h-10 border-b-2 border-gray-700 bg-yellow-200"></div>
-        <ul class="px-4 pt-6">
-          <SidebarLink name="Modules" url="/modules" />
-          <SidebarLink name="Announcements" url="/announcements"/>
-          <SidebarLink name="Assignments" url="/assignments" />
-          <SidebarLink name="Grades" url="/grades" />
-          <SidebarLink name="Files" url="/files" />
-          <SidebarLink name="Syllabus" url="/syllabus" />
-        </ul>
-      </div>
+                  <circle fill="#FDE68A" cx="12" cy="12" r="3"></circle>
+                </svg>
+              </button>
+            </aside>
+          </div>
+          <ul class="pl-4 pr-10 pt-6">
+            <CoursePageLink name="Modules" url="/modules" />
+            <CoursePageLink name="Announcements" url="/announcements" />
+            <CoursePageLink name="Assignments" url="/assignments" />
+            <CoursePageLink name="Grades" url="/grades" />
+            <CoursePageLink name="Files" url="/files" />
+            <CoursePageLink name="Syllabus" url="/syllabus" />
+          </ul>
+        </div>
 
-      <div class="flex-col font-extralight font-sans border-t-2 border-gray-700">
+        <div class="font-sans font-semibold border-t-2 border-gray-700">
+            <aside class="flex justify-end">
+              <button class="relative text-3xl font-bold font-serif h-10 w-10 hover: text-center rounded-bl-md border-b-2 border-l-2 border-gray-700 text-gray-900 bg-gradient-to-r from-green-500 to-green-300 hover:text-yellow-100">
+                +
+              </button>
+            </aside>
+
+          <h2 class="text-sm px-4 pb-1 text-green-400"> GENERAL </h2>
+          <ul class="pl-6">
+            <CourseChatLink name="general" url="/chat" />
+            <CourseChatLink name="homework" url="/chat" />
+            <CourseChatLink name="class-discussion" url="/chat" />
+            <CourseChatLink name="off-topic" url="/chat" />
+          </ul>
+          <h2 class="text-sm px-4 pt-4 pb-1 text-green-400"> OTHER </h2>
+          <ul class="pl-6">
+            <CourseChatLink name="welcome" url="/chat" />
+            <CourseChatLink name="rules" url="/chat" />
+            <CourseChatLink name="bot-commands" url="/chat" />
+          </ul>
+          <h2 class="text-sm px-4 pt-4 pb-1 text-green-400"> CHATS FROM DB </h2>
+          <ul class="pl-6">
+          </ul>
+        </div>
       </div>
     </aside>
   )
 }
 
-function SidebarLink(props) {
+function CoursePageLink(props) {
   return (
-    <li class="py-2">
-    <a
-      href={`${props.url}`}
-      class="focus:text-gray-200 hover:text-green-300">
-      {props.name}
-    </a>
-  </li>
+    <li class="py-2 text-yellow-200 text-xl font-extralight font-sans">
+      <a
+        href={`${props.url}`}
+        class="focus:text-gray-200 hover:text-green-300">
+        {props.name}
+      </a>
+    </li>
+  )
+}
+
+
+function CourseChatLink(props) {
+  return (
+    <li class="py-0.5 text-xs text-gray-100 text-opacity-75">
+      <a
+        href={`${props.url}`}
+        class="focus:text-white focus:text-opacity-100 hover:text-green-300 hover:text-opacity-100">
+        {"# " + props.name}
+      </a>
+    </li>
   )
 }
 
