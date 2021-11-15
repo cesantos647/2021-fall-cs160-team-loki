@@ -1,13 +1,11 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 class Assignments extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { isRowLayout: false }
+    this.state = { isRowLayout: true }
     this.handleLayoutToggle = this.handleLayoutToggle.bind(this);
   }
 
