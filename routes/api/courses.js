@@ -123,7 +123,7 @@ router.put("/:courseId/delete/:studentId", passport.authenticate('jwt', {session
   if(!req.params.studentId) return res.status(400).json({ status: "failure", error: "missing studentId" })
   
   if(!await isOwner(Course, req.params.courseId, req.user._id.toString(), "professorId")){
-    return res.status(401).json({status:"fail"})
+    return res.status(401).send("Unauthorized")
   }
   
   const studentId = req.params.studentId;
