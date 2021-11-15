@@ -123,7 +123,7 @@ router.put("/:courseId/delete/:studentId", passport.authenticate('jwt', {session
   if(!req.params.studentId) return res.status(400).json({ status: "failure", error: "missing studentId" })
   
   if(!await isOwner(Course, req.params.courseId, req.user._id.toString(), "professorId")){
-    return res.status(401).send("Unauthorized")
+    return res.status(401).json({status:"fail"})
   }
   
   const studentId = req.params.studentId;
@@ -136,7 +136,24 @@ router.put("/:courseId/delete/:studentId", passport.authenticate('jwt', {session
         error: "student not found" 
       });
     } else {
-      Course.findByIdAndUpdate( {courseId}, {$pull : { 'studentIds': studentId } });
+      var i = student.courseIds.indexOf(courseId);
+      student.courseIds.splice(i, 1);
+      student.save();
+      return Course.findById(courseId, (err, course)=> {    // find course
+        var i = course.studentIds.indexOf(studentId);
+        if (i > -1) {
+          course.studentIds.splice(i, 1);
+          course.save();
+          res.status(200).json({
+            status: "success"
+          });
+        } else {
+          res.status(404).json({
+            status: "failure",
+            error: "student not found in course"
+          });
+        }
+      });
     }
   });
 });
