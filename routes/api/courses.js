@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const passport = require('passport')
 const Course = require("../../models/CourseModel")
+const User = require("../../models/User")
 
 require('../../config/passport')
 
@@ -57,7 +58,7 @@ router.put("/:courseId", passport.authenticate('jwt', {session: false}), async (
     })
     .catch(() => res.status(404).json({ status: "failure", error: "course not found" }))
   
-})
+});
 
 router.delete("/:courseId", passport.authenticate('jwt', {session: false}), async (req, res) => {
   
@@ -74,6 +75,68 @@ router.delete("/:courseId", passport.authenticate('jwt', {session: false}), asyn
       return res.status(200).json({ status: "success" })
     })
     .catch(() => res.status(404).json({ status: "failure", error: "course not found" }))
-})
+});
+
+// Add a student to a course with student ID
+router.put("/:courseId/:studentId", passport.authenticate('jwt', {session: false}), async (req, res) => {
+
+  if(!req.user._id) res.status(401).send("Unauthorized")
+
+  if(!req.params.courseId) return res.status(400).json({ status: "failure", error: "missing courseId" })
+  if(!req.params.studentId) return res.status(400).json({ status: "failure", error: "missing studentId" })
+  
+  if(!await isOwner(Course, req.params.courseId, req.user._id.toString(), "professorId")){
+    return res.status(401).send("Unauthorized")
+  }
+  
+  const studentId = req.params.studentId;
+  const courseId = req.params.courseId;
+
+  return await User.findById(studentId, (err, student)=> {   // Check if student exists
+    if (!student) {
+      return res.status(404).json({ 
+        status: "failure", 
+        error: "student not found" 
+      })
+    } else {
+      return Course.findById(courseId, (err, updatedStudent)=> {  // Add studentID to list of studentIDs in course
+        updatedStudent.studentIds.push(studentId);
+        updatedStudent.save()
+        res.status(200).json({
+          status: "success", 
+          data: courseAllDataToObject(updatedStudent)
+        })
+      })
+    }
+  })
+  
+});
+
+// Remove a student from a course
+router.put("/:courseId/delete/:studentId", passport.authenticate('jwt', {session: false}), async (req, res) => {
+
+  if(!req.user._id) res.status(401).send("Unauthorized")
+  
+  if(!req.params.courseId) return res.status(400).json({ status: "failure", error: "missing courseId" })
+  if(!req.params.studentId) return res.status(400).json({ status: "failure", error: "missing studentId" })
+  
+  if(!await isOwner(Course, req.params.courseId, req.user._id.toString(), "professorId")){
+    return res.status(401).send("Unauthorized")
+  }
+  
+  const studentId = req.params.studentId;
+  const courseId = req.params.courseId;
+
+  return await User.findById(studentId, (err, student)=> {   // Check if student exists
+    if (!student) {
+      return res.status(404).json({ 
+        status: "failure", 
+        error: "student not found" 
+      });
+    } else {
+      Course.findByIdAndUpdate( {courseId}, {$pull : { 'studentIds': studentId } });
+    }
+  });
+});
 
 module.exports = router
