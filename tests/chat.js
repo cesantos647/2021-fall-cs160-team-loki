@@ -69,6 +69,7 @@ describe("Testing incorrect datatypes", () => {
       .post("/api/chats/chat")
       .send({ messages: [1, 2], users: testUserIds })
       .then(response => {
+        if(response.statusCode == 200) chatId = response.body.data.chatId;
         expect(response.statusCode).toBe(400);
       });
   });
@@ -77,6 +78,7 @@ describe("Testing incorrect datatypes", () => {
       .post("/api/chats/chat")
       .send({ messages: testMessages, users: [1, 2] })
       .then(response => {
+        if(response.statusCode == 200) chatId = response.body.data.chatId;
         expect(response.statusCode).toBe(400);
       });
   });
@@ -85,6 +87,7 @@ describe("Testing incorrect datatypes", () => {
       .post("/api/chats/chat")
       .send({ messages: "message", users: testUserIds })
       .then(response => {
+        if(response.statusCode == 200) chatId = response.body.data.chatId;
         expect(response.statusCode).toBe(400);
       });
   });
@@ -93,6 +96,7 @@ describe("Testing incorrect datatypes", () => {
       .post("/api/chats/chat")
       .send({ messages: testMessages, users: "user" })
       .then(response => {
+        if(response.statusCode == 200) chatId = response.body.data.chatId;
         expect(response.statusCode).toBe(400);
       });
   });
