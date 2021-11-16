@@ -76,7 +76,7 @@ class Register extends Component {
             <h1 className="inline text-white">NAC</h1>
           </div>
           <div className="my-auto">
-            <label class="block pl-12 pb-4 text-2xl text-gray-200 text-sm mb-2" for="username">
+            <label class="block pl-12 pb-4 text-2xl text-gray-200 mb-2" for="username">
               Register
             </label>
             <div className="px-12">

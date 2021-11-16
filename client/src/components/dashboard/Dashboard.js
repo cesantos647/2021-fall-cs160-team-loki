@@ -2,8 +2,22 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
+import { getCourseDetails } from "../../actions/courseActions";
 
 class Dashboard extends Component {
+  constructor() {
+    super();
+    this.state = {
+      courseId: "",
+      course: {},
+      errors: {}
+    }
+  }
+  
+  componentDidMount() {
+    console.log(this.props);
+  }
+
   onLogoutClick = e => {
     e.preventDefault();
     this.props.logoutUser();
@@ -18,7 +32,7 @@ return (
           <div className="col s12">
             <h4>
               <div className="text-green-400">Hey there,
-              <span className="font-bold text-yellow-300">{" " + user.name.split(" ")[0]}</span>
+              <span className="font-bold text-yellow-300">{" " + user.id.split(" ")[0] }</span>
               </div>
               <p className="text-white flow-text grey-text">
                 You are currently on the dashboard. 
@@ -38,6 +52,7 @@ return (
             </button>
           </div>
         </div>
+        
       </div>
     );
   }

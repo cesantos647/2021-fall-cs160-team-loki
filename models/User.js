@@ -14,6 +14,14 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
+  courseIds: {
+    type: [String],
+    required: false
+  },
+  chatIds: {
+    type: [String],
+    required: false
+  },
   date: {
     type: Date,
     default: Date.now
