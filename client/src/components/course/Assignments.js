@@ -1,17 +1,11 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 class Assignments extends Component {
-  onLogoutClick = e => {
-    e.preventDefault();
-    this.props.logoutUser();
-  };
 
   constructor(props) {
     super(props);
-    this.state = { isRowLayout: false }
+    this.state = { isRowLayout: true }
     this.handleLayoutToggle = this.handleLayoutToggle.bind(this);
   }
 
@@ -146,15 +140,6 @@ function AssignmentBtn(props) {
     </div>
   )
 }
-
-Assignments.propTypes = {
-  logoutUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
-};
-
-const mapStateToProps = state => ({
-  auth: state.auth
-});
 
 export default connect(
 )(Assignments);
