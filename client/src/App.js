@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 
 import Navbar from "./components/layout/Navbar";
+import CourseSidebar from "./components/layout/CourseSidebar";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
@@ -45,7 +46,8 @@ class App extends Component {
             <Route exact path="/" component={Login} />
             <Route exact path="/register" component={Register} />
             <div>
-              <Navbar />
+              <Navbar component={Navbar}/>
+              <CourseSidebar component={CourseSidebar}/>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute exact path="/assignments" component={Assignments} /> 
             </div>
