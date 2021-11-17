@@ -34,7 +34,6 @@ beforeAll(async () => {
       userId = jwtDecode(token).id;
     });
 });
-
 describe("Test functionality", () => {
     let courseId;
     test("Create Course", () => {
