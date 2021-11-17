@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { logoutUser } from "../../actions/authActions";
 
 class CourseSidebar extends Component {
 
@@ -60,7 +58,7 @@ function Sidebar(props) {
         <div class="">
           <div class="relative h-10 align-top border-b-2 border-gray-700 bg-gradient-to-r from-yellow-300 to-yellow-100">
             <aside class="flex justify-center">
-              <button class="mx-0 relative block top-5 h-10 w-10 rounded-full overflow-hidden border-2 border-gray-700 text-gray-900 bg-yellow-200 hover:text-yellow-200 hover:bg-gray-900">
+              <button id="courseSettings" class="mx-0 relative block top-5 h-10 w-10 rounded-full overflow-hidden border-2 border-gray-700 text-gray-900 bg-yellow-200 hover:text-yellow-200 hover:bg-gray-900">
                 <svg
                   class="h-6 w-8"
                   viewBox="0 0 20 26"
@@ -102,7 +100,7 @@ function Sidebar(props) {
 
         <div class="font-sans font-semibold border-t-2 border-gray-700">
             <aside class="flex justify-end">
-              <button class="relative text-3xl font-bold font-serif h-10 w-10 hover: text-center rounded-bl-md border-b-2 border-l-2 border-gray-700 text-gray-900 bg-gradient-to-r from-green-500 to-green-300 hover:text-yellow-100">
+              <button id="addChat" class="relative text-3xl font-bold font-serif h-10 w-10 hover: text-center rounded-bl-md border-b-2 border-l-2 border-gray-700 text-gray-900 bg-gradient-to-r from-green-500 to-green-300 hover:text-yellow-100">
                 +
               </button>
             </aside>

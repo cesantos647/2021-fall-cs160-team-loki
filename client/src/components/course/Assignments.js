@@ -22,7 +22,7 @@ class Assignments extends Component {
       <div class="flex-col ml-16 bg-gray-800 h-full min-h-screen">
 
         <div class="fixed right-0">
-          <button onClick={this.handleLayoutToggle} class={`border-4 opacity-90 border-opacity-70 rounded-lg m-4 bg-blue-900 text-blue-300 hover:bg-blue-800 hover:text-green-300 hover:opacity-100 hover:border-opacity-100
+          <button id="layoutToggle" onClick={this.handleLayoutToggle} class={`border-4 opacity-90 border-opacity-70 rounded-lg m-4 bg-blue-900 text-blue-300 hover:bg-blue-800 hover:text-green-300 hover:opacity-100 hover:border-opacity-100
             ${this.state.isRowLayout ? "border-yellow-300 hover:border-green-400" : "border-green-400 hover:border-yellow-300" }`}>
             {
               this.state.isRowLayout ?
