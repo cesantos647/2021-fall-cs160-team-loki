@@ -32,6 +32,7 @@ router.post("/", passport.authenticate('jwt', {session: false}), (req, res) => {
   if(error) return res.status(400).json({ status: "failure", error: error.details[0].message })
 
   req.body.professorId = req.user._id.toString()
+  
   const newCourse = new Course(req.body)
   return newCourse.save()
     .then(course => res.status(200).json({ status: "success", data: { courseId: course._id.toString() } }))
@@ -45,7 +46,7 @@ router.put("/:courseId", passport.authenticate('jwt', {session: false}), async (
   if(!req.params.courseId) return res.status(400).json({ status: "failure", error: "missing courseId" })
   
   if(!await isOwner(Course, req.params.courseId, req.user._id.toString(), "professorId")){
-    return res.status(401).send("Unauthorized")
+  return res.status(401).send("Unauthorized")
   }
   
   const { data, error } = validateCourseInput.validate(req.body);
@@ -66,6 +67,7 @@ router.delete("/:courseId", passport.authenticate('jwt', {session: false}), asyn
   
   if(!req.params.courseId) return res.status(400).json({ status: "failure", error: "missing courseId" })
 
+  
   if(!await isOwner(Course, req.params.courseId, req.user._id.toString(), "professorId")){
     return res.status(401).send("Unauthorized")
   }
@@ -84,6 +86,7 @@ router.put("/:courseId/:studentId", passport.authenticate('jwt', {session: false
 
   if(!req.params.courseId) return res.status(400).json({ status: "failure", error: "missing courseId" })
   if(!req.params.studentId) return res.status(400).json({ status: "failure", error: "missing studentId" })
+  
   
   if(!await isOwner(Course, req.params.courseId, req.user._id.toString(), "professorId")){
     return res.status(401).send("Unauthorized")
@@ -110,7 +113,7 @@ router.put("/:courseId/:studentId", passport.authenticate('jwt', {session: false
         })
       })
     }
-  })
+  }).clone();
   
 });
 
@@ -155,7 +158,7 @@ router.put("/:courseId/delete/:studentId", passport.authenticate('jwt', {session
         }
       });
     }
-  });
+  }).clone();
 });
 
 module.exports = router
