@@ -31,10 +31,12 @@ beforeAll(async () => {
     .then(response => {
       expect(response.statusCode).toBe(200);
       token = response.body.token
+      console.log(token)
       userId = jwtDecode(token).id;
     });
 });
 describe("Test functionality", () => {
+  console.log(token)
     let courseId;
     test("Create Course", () => {
         return request(app)
@@ -79,7 +81,7 @@ describe("Test functionality", () => {
     })
     test("Remove a student to a course with student ID", () => {
         return request(app)
-        .delete("/api/courses/" + courseId + "/" + userId)
+        .put("/api/courses/" + courseId + "/delete/" + userId)
         .set({'Authorization': token})
         .then(response => {
             expect(response.statusCode).toBe(200);

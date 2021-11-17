@@ -113,7 +113,7 @@ router.put("/:courseId/:studentId", passport.authenticate('jwt', {session: false
         })
       })
     }
-  })
+  }).clone();
   
 });
 
@@ -158,7 +158,7 @@ router.put("/:courseId/delete/:studentId", passport.authenticate('jwt', {session
         }
       });
     }
-  });
+  }).clone();
 });
 
 module.exports = router

@@ -13,7 +13,7 @@ beforeAll(async () => {
     .post("/api/users/register")
     .send({ 
       name: "testingUser",
-      email: "user@test.com",
+      email: "chatroom@test.com",
       password: "testingUser",
       password2: "testingUser"
     })
@@ -23,7 +23,7 @@ beforeAll(async () => {
   await request(app)
     .post("/api/users/login")
     .send({ 
-      email: "user@test.com",
+      email: "chatroom@test.com",
       password: "testingUser"
     })
     .then(response => {
@@ -64,7 +64,6 @@ describe("POST/GET for chatroom", () => {
     return request(app)
       .post("/api/chatrooms/addChat/" + chatRoomId + "/" + chatId)
       .then(response => {
-        console.log(response.body)
         expect(response.statusCode).toBe(200);
         expect(Array.isArray(response.body.data.chatRoom.users)).toBe(true);
         expect(Array.isArray(response.body.data.chatRoom.chats)).toBe(true);

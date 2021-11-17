@@ -14,7 +14,7 @@ beforeAll(async () => {
     .post("/api/users/register")
     .send({ 
       name: "testingUser",
-      email: "user@test.com",
+      email: "chat@test.com",
       password: "testingUser",
       password2: "testingUser"
     })
@@ -24,7 +24,7 @@ beforeAll(async () => {
   await request(app)
     .post("/api/users/login")
     .send({ 
-      email: "user@test.com",
+      email: "chat@test.com",
       password: "testingUser"
     })
     .then(response => {
