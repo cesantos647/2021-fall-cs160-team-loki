@@ -25,13 +25,13 @@ router.get("/:courseId", (req, res) => {
 
 router.post("/", passport.authenticate('jwt', {session: false}), (req, res) => {
   
-  //if(!req.user._id) res.status(401).send("Unauthorized")
+  if(!req.user._id) res.status(401).send("Unauthorized")
 
   const { data, error } = validateCourseInput.validate(req.body);
 
   if(error) return res.status(400).json({ status: "failure", error: error.details[0].message })
 
-  //req.body.professorId = req.user._id.toString()
+  req.body.professorId = req.user._id.toString()
   
   const newCourse = new Course(req.body)
   return newCourse.save()
@@ -41,12 +41,11 @@ router.post("/", passport.authenticate('jwt', {session: false}), (req, res) => {
 
 router.put("/:courseId", passport.authenticate('jwt', {session: false}), async (req, res) => {
   
-  //if(!req.user._id) res.status(401).send("Unauthorized")
+  if(!req.user._id) res.status(401).send("Unauthorized")
 
   if(!req.params.courseId) return res.status(400).json({ status: "failure", error: "missing courseId" })
   
-  //if(!await isOwner(Course, req.params.courseId, req.user._id.toString(), "professorId")){
-  if(!await isOwner(Course, req.params.courseId, req.body.professorId, "professorId")){
+  if(!await isOwner(Course, req.params.courseId, req.user._id.toString(), "professorId")){
   return res.status(401).send("Unauthorized")
   }
   
@@ -64,14 +63,14 @@ router.put("/:courseId", passport.authenticate('jwt', {session: false}), async (
 
 router.delete("/:courseId", passport.authenticate('jwt', {session: false}), async (req, res) => {
   
-  //if(!req.user._id) res.status(401).send("Unauthorized")
+  if(!req.user._id) res.status(401).send("Unauthorized")
   
   if(!req.params.courseId) return res.status(400).json({ status: "failure", error: "missing courseId" })
 
-  /*
+  
   if(!await isOwner(Course, req.params.courseId, req.user._id.toString(), "professorId")){
     return res.status(401).send("Unauthorized")
-  }*/
+  }
 
   return Course.deleteOne({ _id: req.params.courseId })
     .then(() => {
@@ -83,15 +82,15 @@ router.delete("/:courseId", passport.authenticate('jwt', {session: false}), asyn
 // Add a student to a course with student ID
 router.put("/:courseId/:studentId", passport.authenticate('jwt', {session: false}), async (req, res) => {
 
-  //if(!req.user._id) res.status(401).send("Unauthorized")
+  if(!req.user._id) res.status(401).send("Unauthorized")
 
   if(!req.params.courseId) return res.status(400).json({ status: "failure", error: "missing courseId" })
   if(!req.params.studentId) return res.status(400).json({ status: "failure", error: "missing studentId" })
   
-  /*
+  
   if(!await isOwner(Course, req.params.courseId, req.user._id.toString(), "professorId")){
     return res.status(401).send("Unauthorized")
-  }*/
+  }
   
   const studentId = req.params.studentId;
   const courseId = req.params.courseId;
@@ -121,14 +120,14 @@ router.put("/:courseId/:studentId", passport.authenticate('jwt', {session: false
 // Remove a student from a course
 router.put("/:courseId/delete/:studentId", passport.authenticate('jwt', {session: false}), async (req, res) => {
 
-  //if(!req.user._id) res.status(401).send("Unauthorized")
+  if(!req.user._id) res.status(401).send("Unauthorized")
   
   if(!req.params.courseId) return res.status(400).json({ status: "failure", error: "missing courseId" })
   if(!req.params.studentId) return res.status(400).json({ status: "failure", error: "missing studentId" })
-  /*
+  
   if(!await isOwner(Course, req.params.courseId, req.user._id.toString(), "professorId")){
     return res.status(401).send("Unauthorized")
-  }*/
+  }
   
   const studentId = req.params.studentId;
   const courseId = req.params.courseId;

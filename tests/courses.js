@@ -39,7 +39,8 @@ describe("Test functionality", () => {
     test("Create Course", () => {
         return request(app)
         .post("/api/courses/")
-        .send({courseName: "CS160", courseSection: "Section 03", professorId: userId})
+        .set({'Authorization': token})
+        .send({courseName: "CS160", courseSection: "Section 03"})
         .then(response => {
             expect(response.statusCode).toBe(200);
             courseId = response.body.data.courseId;
@@ -48,6 +49,7 @@ describe("Test functionality", () => {
     test("Get Course Details", () => {
         return request(app)
         .get("/api/courses/" + courseId)
+        .set({'Authorization': token})
         .then(response => {
             expect(response.statusCode).toBe(200);
             expect(response.body.data.courseName).toBe("CS160");
@@ -58,7 +60,8 @@ describe("Test functionality", () => {
     test("Update Course Details", () => {
         return request(app)
         .put("/api/courses/" + courseId)
-        .send({courseName: "CS160", courseSection: "Section 02", professorId: userId})
+        .set({'Authorization': token})
+        .send({courseName: "CS160", courseSection: "Section 02"})
         .then(response => {
             expect(response.statusCode).toBe(200);
             expect(response.body.data.courseName).toBe("CS160");
@@ -69,6 +72,7 @@ describe("Test functionality", () => {
     test("Add a student to a course with student ID", () => {
         return request(app)
         .put("/api/courses/" + courseId + "/" + userId)
+        .set({'Authorization': token})
         .then(response => {
             expect(response.statusCode).toBe(200);
         })
@@ -76,6 +80,7 @@ describe("Test functionality", () => {
     test("Remove a student to a course with student ID", () => {
         return request(app)
         .delete("/api/courses/" + courseId + "/" + userId)
+        .set({'Authorization': token})
         .then(response => {
             expect(response.statusCode).toBe(200);
         })
@@ -83,6 +88,7 @@ describe("Test functionality", () => {
     test("Delete Course", () => {
         return request(app)
         .delete("/api/courses/" + courseId)
+        .set({'Authorization': token})
         .then(response => {
             expect(response.statusCode).toBe(200);
         })
