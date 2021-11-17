@@ -24,7 +24,7 @@ router.get('/:assignmentId', (req, res) => {
 
 router.post('/', passport.authenticate('jwt', {session: false}), (req, res) => {
 
-  if(!req.user._id) res.status(401).send("Unauthorized")
+  //if(!req.user._id) res.status(401).send("Unauthorized")
 
   const { data, error } = validateAssignmentInput.validate(req.body);
 
@@ -40,13 +40,14 @@ router.post('/', passport.authenticate('jwt', {session: false}), (req, res) => {
 
 router.put('/:assignmentId', passport.authenticate('jwt', {session: false}), async (req, res) => {
 
-  if(!req.user._id) return res.status(401).send("Unauthorized")
+  //if(!req.user._id) return res.status(401).send("Unauthorized")
 
   if(!req.params.assignmentId) return res.status(400).json({ status: "failure", error: "missing assignmentId" })
 
+  /*
   if(!await isOwner(Assignment, req.params.assignmentId, req.user._id.toString(), "professorId")){
     return res.status(401).send("Unauthorized")
-  } 
+  } */
   
   const { data, error } = validateAssignmentInput.validate(req.body);
 
@@ -59,13 +60,13 @@ router.put('/:assignmentId', passport.authenticate('jwt', {session: false}), asy
 
 router.delete("/:assignmentId", passport.authenticate('jwt', {session: false}), async (req, res) => {
 
-  if(!req.user._id) res.status(401).send("Unauthorized")
+  //if(!req.user._id) res.status(401).send("Unauthorized")
 
   if(!req.params.assignmentId) return res.status(400).json({ status: "failure", error: "missing assignmentId" })
-
+/*
   if(!await isOwner(Assignment, req.params.assignmentId, req.user._id.toString(), "professorId")){
     return res.status(401).send("Unauthorized")
-  }
+  }*/
 
   return Assignment.deleteOne({ _id: req.params.assignmentId })
     .then(() => {
