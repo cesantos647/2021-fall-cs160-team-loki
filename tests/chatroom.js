@@ -62,7 +62,7 @@ describe("POST/GET for chatroom", () => {
     let chatId = "testChatId3";
     testChatIds.push("testChatId3");
     return request(app)
-      .post("/api/chatrooms/addChat/" + chatRoomId + "/" + chatId)
+      .post("/api/chatrooms/" + chatRoomId + "/" + chatId)
       .then(response => {
         expect(response.statusCode).toBe(200);
         expect(Array.isArray(response.body.data.chatRoom.users)).toBe(true);
