@@ -32,7 +32,7 @@ router.get("/:chatroomId", (req, res) => {
 //Add Chat To Chat Room
 //assumes both chat and chatroom are valid, will need to update later on
 router.post("/:chatroomId/:chatId", (req, res) => {
-    if(!req.params.chatId || !req.params.chatRoomId) return res.status(400).json({status: "failure", error: "Missing chatId or chatroomId"});
+    if(!req.params.chatId || !req.params.chatroomId) return res.status(400).json({status: "failure", error: "Missing chatId or chatroomId"});
 
     return Chatroom.findOneAndUpdate({_id: req.params.chatroomId}, {$push: {chats: req.params.chatId}})
         .then(chatRoom => {
