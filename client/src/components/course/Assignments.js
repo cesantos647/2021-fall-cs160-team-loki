@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import FloatButton from "../layout/FloatButton";
 
 class Assignments extends Component {
 
@@ -34,6 +35,10 @@ class Assignments extends Component {
                 </svg>
             }
           </button>
+        </div>
+
+        <div class="fixed right-0 bottom-0 mb-2 mr-2">
+          <FloatButton label="+" bgcolor="bg-blue-600" url="/assignmentcreation" isaddbtn={true}/>
         </div>
 
         <div class={`ml-1 ${this.state.isRowLayout ? 'grid' : 'flex'}`}>
@@ -111,8 +116,8 @@ class Assignments extends Component {
           <div class="border-t-4 border-yellow-400 p-4 mb-6" >
             <h1 class="pb-6 pt-2 px-2 text-xl text-yellow-400">Assignments from Database</h1>
             <ul class="border-4 border-opacity-25 border-gray-600">
-              <AssignmentBtn name="New Assignment" issubmitted={true} isgraded={true} duedate="11/1/2021" closedate="11/7/2021" pts="90" posspts="100" />
-              <AssignmentBtn name="New Assignment" issubmitted={false} isgraded={true} duedate="11/1/2021" closedate="11/7/2021" pts="0" posspts="100" />
+              <AssignmentButton name="New Assignment" issubmitted={true} isgraded={true} duedate="11/1/2021" closedate="11/7/2021" pts="90" posspts="100" />
+              <AssignmentButton name="New Assignment" issubmitted={false} isgraded={true} duedate="11/1/2021" closedate="11/7/2021" pts="0" posspts="100" />
             </ul>
           </div>
         </div>
@@ -121,7 +126,7 @@ class Assignments extends Component {
   }
 }
 
-function AssignmentBtn(props) {
+function AssignmentButton(props) {
   return (
     <div class={`box-content border-2 border-t-0 border-opacity-50 ${props.issubmitted ? "border-green-400" : "border-red-400"} bg-gray-700 p-4 flex hover:opacity-70`}>
       <div class="text-left pt-2 flex-1">

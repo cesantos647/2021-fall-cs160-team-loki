@@ -13,7 +13,9 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
+import CourseCreation from "./components/course/CourseCreation";
 import Assignments from "./components/course/Assignments";
+import AssignmentCreation from "./components/course/AssignmentCreation";
 import "tailwindcss/tailwind.css"
 
 // Check for token to keep user logged in
@@ -49,7 +51,9 @@ class App extends Component {
               <Navbar component={Navbar}/>
               <CourseSidebar component={CourseSidebar}/>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              <PrivateRoute exact path="/coursecreation" component={CourseCreation} />
               <PrivateRoute exact path="/assignments" component={Assignments} /> 
+              <PrivateRoute exact path="/assignmentcreation" component={AssignmentCreation} />
             </div>
           </Switch>
         </div>
