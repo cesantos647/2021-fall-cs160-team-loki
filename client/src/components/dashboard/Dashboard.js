@@ -14,12 +14,12 @@ class Dashboard extends Component {
     }
   }
   
+  // on page load
   async componentDidMount() {
-    const userId = await this.props.auth.user.id
-    const response = await getUser(userId)
-    this.setState({ courses: response })
-    console.log(response)
-    console.log(this.state.courses)
+    const userId = await this.props.auth.user.id  // get userID (who is logged in)
+    const response = await getUser(userId)        // axios call to get user (authActions -> routes/api/users.js)
+    this.setState({ courses: response })          // i put response into state to display it and see the data in console
+    console.log(response)                         // displaying the info to console
   }
 
   onLogoutClick = e => {
