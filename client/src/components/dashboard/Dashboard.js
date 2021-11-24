@@ -1,25 +1,65 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { logoutUser } from "../../actions/authActions";
-import { getUser } from "../../actions/authActions";
+import { logoutUser, getUser } from "../../actions/authActions";
+import { getCourseDetails } from "../../actions/courseActions";
+import { getAssignment } from "../../actions/assignmentActions"
+import DashboardCard from "./DashboardCard";
 
 class Dashboard extends Component {
   constructor() {
     super();
     this.state = {
       courseId: "",
+      user: [],
       courses: [],
+      assignments: [],
+      isLoaded: false,
       errors: {}
     }
   }
   
+  async getCourse( courseId ) {
+    const response = await getCourseDetails(courseId)
+    return response
+  };
+
+  async getUser( userId ) {
+    const response = await getUser(userId)
+    return response
+  }
+
+  async getAssignment( assignmentId ) {
+    const response = await(getAssignment(assignmentId))
+    return response
+  }
+
   // on page load
   async componentDidMount() {
-    const userId = await this.props.auth.user.id  // get userID (who is logged in)
-    const response = await getUser(userId)        // axios call to get user (authActions -> routes/api/users.js)
-    this.setState({ courses: response })          // i put response into state to display it and see the data in console
-    console.log(response)                         // displaying the info to console
+    const userId = await this.props.auth.user.id    // get userID (who is logged in)
+    const user = await getUser(userId)              // axios call to get user (authActions -> routes/api/users.js)
+    this.setState({ user: user })                   // put response into state d
+    
+    const promises = this.state.user.courseIds.map(id => this.getCourse(id))  // get array of promises
+    const courses = await Promise.all(promises)                               // retrieve data from promises (the course objects)
+    this.setState({ courses: courses })                                       // put response into state
+
+    courses.map(course => {
+      this.setState({ assignments: this.state.assignments.concat(course.assignmentIds) }) // putting assignments into state
+    })
+
+    const assignPromises = this.state.assignments.map(id => this.getAssignment(id))   // retrieve assignment objs from db using ids
+    const assignObjs = await Promise.all(assignPromises)                              // await promises
+    assignObjs.sort(function(a, b) {
+      var keyA = new Date(a.dueDate), keyB = new Date(b.dueDate);
+      if (keyA < keyB) return -1;
+      if (keyB > keyA) return 1;
+      return 0;
+    })
+    this.setState({ assignments: assignObjs })  // put response into state
+
+
+    this.setState({ isLoaded: true })
   }
 
   onLogoutClick = e => {
@@ -39,8 +79,9 @@ return (
               <span className="font-bold text-yellow-300">{" " + user.id.split(" ")[0] }</span>
               </div>
               <p className="text-white flow-text grey-text">
-                You are currently on the dashboard. 
+                You are currently on the dashboard.
                 <span className="font-bold text-red-500"> (IN PROGRESS)</span>
+                {this.state.isLoaded ? this.state.assignments.map(assignment => <DashboardCard user={user.id} assignment={assignment}/>) : <div> Loading </div>}
               </p>
             </h4>
             <button
