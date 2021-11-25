@@ -44,6 +44,7 @@ router.put('/:assignmentId', passport.authenticate('jwt', {session: false}), asy
 
   if(!req.params.assignmentId) return res.status(400).json({ status: "failure", error: "missing assignmentId" })
 
+  
   if(!await isOwner(Assignment, req.params.assignmentId, req.user._id.toString(), "professorId")){
     return res.status(401).send("Unauthorized")
   } 

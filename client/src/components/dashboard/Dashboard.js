@@ -82,7 +82,7 @@ return (
             </div>
             {this.state.isLoaded ? this.state.assignments.map(assignment => <DashboardCard user={user.id} assignment={assignment}/>) : <div> Loading </div>}
           </div>
-      </div>
+        </div>
     );
   }
 }

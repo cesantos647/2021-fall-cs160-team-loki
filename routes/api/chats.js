@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Course = require("../../models/Chat")
+const Chat = require("../../models/Chat");
 
 const validateChatInput = require("../../validation/chatValidation");
 
@@ -10,7 +10,7 @@ const { chatAllDataToObject } = require("../../lib/mongo/chatsToObject");
 router.post("/chat", (req, res) => {
     const { data, error } = validateChatInput.validate(req.body);
 
-    if(error) return res.status(400).json({status: "failure", error: err.details[0].message});
+    if(error) return res.status(400).json({status: "failure", error: error.details[0].message});
 
     const newChat = new Chat(req.body);
     return newChat.save()
@@ -28,17 +28,4 @@ router.get("/:chatId", (req, res) => {
         .catch(() => res.status(404).json({status: "failure", error: "Chat not found"}));
 });
 
-//Future tickets
-
-//Send Message
-router.get("/addmessage/:chatId", (req, res) => {
-
-});
-
-//Delete Message
-
-router.get("/delmessage/:chatId", (req, res) => {
-
-});
-
-module.exports = router
+module.exports = router;
