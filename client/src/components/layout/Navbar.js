@@ -16,12 +16,11 @@ class Navbar extends Component {
         <aside class="grid grid-rows-1 border-r-2 bg-blue-900 text-yellow-400 border-gray-700 shadow h-full fixed z-30">
           <div class="overflow-y-auto">
             <div class="h-16 flex items-center w-full">
-              <a id="logo" class="mx-auto">
                 <img
+                  id="logo"
                   class="h-14 w-14 mx-auto"
                   src="https://i.imgur.com/7lqNQBX.png"
                   alt="savnac logo" />
-              </a>
             </div>
             <ul class="">
               <PageButton id="dashboard" url="/dashboard" icon={
@@ -69,9 +68,9 @@ class Navbar extends Component {
           <div class="overflow-y-auto">
             <ul>
               <FloatButton label="+" bgcolor="bg-gray-900" url="/coursecreation" isaddbtn={true} />
-              <FloatButton label="CS 185C" bgcolor="bg-indigo-500" url="/chat"/>
-              <FloatButton label="CS 157A" bgcolor="bg-pink-500" url="/chat"/>
-              <FloatButton label="CS 160" bgcolor="bg-purple-500" url="/chat" iscurrentcourse={true}/>
+              <FloatButton label="CS 185C" bgcolor="bg-indigo-500" url="/courses/:courseid/chat"/>
+              <FloatButton label="CS 157A" bgcolor="bg-pink-500" url="/courses/:courseid/chat"/>
+              <FloatButton label="CS 160" bgcolor="bg-purple-500" url="/courses/:courseid/chat" iscurrentcourse={true}/>
             </ul>
           </div>
         </aside>
