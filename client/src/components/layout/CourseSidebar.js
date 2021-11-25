@@ -20,7 +20,7 @@ class CourseSidebar extends Component {
       <div class="ml-12 fixed items-center align-middle z-40">
         <Sidebar sidebar={this.state.showSidebar} />
         <aside class="flex items-center align-middle h-screen">
-          <button onClick={this.handleSidebarToggle} class="fixed block h-10 w-10 rounded-full overflow-hidden border-2 border-gray-700 text-gray-700 bg-gray-900 hover:border-yellow-200">
+          <button onClick={this.handleSidebarToggle} class="fixed block h-10 w-10 rounded-full overflow-hidden border-2 border-gray-700 text-gray-700 bg-gray-900 hover:border-yellow-200 animate-spin">
             {
               this.state.showSidebar ?
                 <svg
@@ -91,7 +91,9 @@ function Sidebar(props) {
           <ul class="pl-4 pr-10 pt-6">
             <CoursePageLink name="Modules" url="/courses/:courseid/modules" />
             <CoursePageLink name="Announcements" url="/courses/:courseid/announcements" />
-            <CoursePageLink name="Assignments" url="/courses/:courseid/assignments" />
+            <div class="animate-pulse">
+              <CoursePageLink name="Assignments" url="/courses/:courseid/assignments" />
+            </div>
             <CoursePageLink name="Grades" url="/courses/:courseid/grades" />
             <CoursePageLink name="Files" url="/courses/:courseid/files" />
             <CoursePageLink name="Syllabus" url="/courses/:courseid/syllabus" />
@@ -99,13 +101,13 @@ function Sidebar(props) {
         </div>
 
         <div class="font-sans font-semibold border-t-2 border-gray-700">
-            <aside class="flex justify-end">
-              <a
+          <aside class="flex justify-end">
+            <a
               href="/courses/:courseid/chatcreation"
               id="addChat" class="relative text-3xl font-bold font-serif h-10 w-10 hover: text-center rounded-bl-md border-b-2 border-l-2 border-gray-700 text-gray-900 bg-gradient-to-r from-green-500 to-green-300 hover:text-yellow-100">
-                +
-              </a>
-            </aside>
+              +
+            </a>
+          </aside>
 
           <h2 class="text-sm px-4 pb-1 text-green-400"> GENERAL </h2>
           <ul class="pl-6">
