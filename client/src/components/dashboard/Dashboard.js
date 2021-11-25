@@ -74,7 +74,7 @@ render() {
 return (
       <div className="w-screen h-screen bg-gray-800 bg-cover center">
           <div className="col s12">
-            <h1 className="text-white text-center text-2xl flow-text grey-text py-8">
+            <h1 className="py-8 text-2xl text-center text-white flow-text grey-text">
               Welcome to the dashboard
             </h1>
             <div>

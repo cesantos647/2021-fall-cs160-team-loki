@@ -15,18 +15,17 @@ class Navbar extends Component {
       <div class="bg-gray-700">
         <aside class="grid grid-rows-1 border-r-2 bg-blue-900 text-yellow-400 border-gray-700 shadow h-full fixed z-30">
           <div class="overflow-y-auto">
-            <div class="h-16 flex items-center w-full">
-              <a id="logo" class="mx-auto">
+            <div class="h-16 flex items-center w-full animate-bounce">
                 <img
+                  id="logo"
                   class="h-14 w-14 mx-auto"
                   src="https://i.imgur.com/7lqNQBX.png"
                   alt="savnac logo" />
-              </a>
             </div>
             <ul class="">
               <PageButton id="dashboard" url="/dashboard" icon={
                 <svg
-                  class="h-7 w-14" viewBox="-5 0 20 20" fill="none" stroke="currentColor" stroke-width="1">
+                  class="h-7 w-14 animate-pulse" viewBox="-5 0 20 20" fill="none" stroke="currentColor" stroke-width="1">
                   <path d="M16.557,4.467h-1.64v-0.82c0-0.225-0.183-0.41-0.409-0.41c-0.226,0-0.41,0.185-0.41,0.41v0.82H5.901v-0.82c0-0.225-0.185-0.41-0.41-0.41c-0.226,0-0.41,0.185-0.41,0.41v0.82H3.442c-0.904,0-1.64,0.735-1.64,1.639v9.017c0,0.904,0.736,1.64,1.64,1.64h13.114c0.904,0,1.64-0.735,1.64-1.64V6.106C18.196,5.203,17.461,4.467,16.557,4.467 M17.377,15.123c0,0.453-0.366,0.819-0.82,0.819H3.442c-0.453,0-0.82-0.366-0.82-0.819V8.976h14.754V15.123z M17.377,8.156H2.623V6.106c0-0.453,0.367-0.82,0.82-0.82h1.639v1.23c0,0.225,0.184,0.41,0.41,0.41c0.225,0,0.41-0.185,0.41-0.41v-1.23h8.196v1.23c0,0.225,0.185,0.41,0.41,0.41c0.227,0,0.409-0.185,0.409-0.41v-1.23h1.64c0.454,0,0.82,0.367,0.82,0.82V8.156z"></path>
                 </svg>}
               />
@@ -58,7 +57,7 @@ class Navbar extends Component {
             <div id="logout" class="mt-auto h-16 items-center w-full">
               <button
                 onClick={this.onLogoutClick}
-                class="h-16 justify-center items-center w-full hover:bg-yellow-400 focus:outline-none">
+                class="h-16 justify-center items-center w-full hover:bg-yellow-400 focus:outline-none animate-pulse">
                 <svg 
                   class="h-7 w-14 text-red-500 focus:text-gray-100" width="24" height="24" viewBox="-5 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path> <polyline points="16 17 21 12 16 7"></polyline> <line x1="21" y1="12" x2="9" y2="12"></line>
                 </svg>
@@ -68,10 +67,12 @@ class Navbar extends Component {
 
           <div class="overflow-y-auto">
             <ul>
+              <div class="animate-pulse">
               <FloatButton label="+" bgcolor="bg-gray-900" url="/coursecreation" isaddbtn={true} />
-              <FloatButton label="CS 185C" bgcolor="bg-indigo-500" url="/chat"/>
-              <FloatButton label="CS 157A" bgcolor="bg-pink-500" url="/chat"/>
-              <FloatButton label="CS 160" bgcolor="bg-purple-500" url="/chat" iscurrentcourse={true}/>
+              </div>
+              <FloatButton label="CS 185C" bgcolor="bg-indigo-500" url="/courses/:courseid/chat"/>
+              <FloatButton label="CS 157A" bgcolor="bg-pink-500" url="/courses/:courseid/chat"/>
+              <FloatButton label="CS 160" bgcolor="bg-purple-500" url="/courses/:courseid/chat" isselected={true}/>
             </ul>
           </div>
         </aside>

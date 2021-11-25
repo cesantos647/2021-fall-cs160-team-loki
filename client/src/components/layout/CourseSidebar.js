@@ -20,7 +20,7 @@ class CourseSidebar extends Component {
       <div class="ml-12 fixed items-center align-middle z-40">
         <Sidebar sidebar={this.state.showSidebar} />
         <aside class="flex items-center align-middle h-screen">
-          <button onClick={this.handleSidebarToggle} class="fixed block h-10 w-10 rounded-full overflow-hidden border-2 border-gray-700 text-gray-700 bg-gray-900 hover:border-yellow-200">
+          <button onClick={this.handleSidebarToggle} class="fixed block h-10 w-10 rounded-full overflow-hidden border-2 border-gray-700 text-gray-700 bg-gray-900 hover:border-yellow-200 animate-spin">
             {
               this.state.showSidebar ?
                 <svg
@@ -89,34 +89,38 @@ function Sidebar(props) {
             </aside>
           </div>
           <ul class="pl-4 pr-10 pt-6">
-            <CoursePageLink name="Modules" url="/modules" />
-            <CoursePageLink name="Announcements" url="/announcements" />
-            <CoursePageLink name="Assignments" url="/assignments" />
-            <CoursePageLink name="Grades" url="/grades" />
-            <CoursePageLink name="Files" url="/files" />
-            <CoursePageLink name="Syllabus" url="/syllabus" />
+            <CoursePageLink name="Modules" url="/courses/:courseid/modules" />
+            <CoursePageLink name="Announcements" url="/courses/:courseid/announcements" />
+            <div class="animate-pulse">
+              <CoursePageLink name="Assignments" url="/courses/:courseid/assignments" />
+            </div>
+            <CoursePageLink name="Grades" url="/courses/:courseid/grades" />
+            <CoursePageLink name="Files" url="/courses/:courseid/files" />
+            <CoursePageLink name="Syllabus" url="/courses/:courseid/syllabus" />
           </ul>
         </div>
 
         <div class="font-sans font-semibold border-t-2 border-gray-700">
-            <aside class="flex justify-end">
-              <button id="addChat" class="relative text-3xl font-bold font-serif h-10 w-10 hover: text-center rounded-bl-md border-b-2 border-l-2 border-gray-700 text-gray-900 bg-gradient-to-r from-green-500 to-green-300 hover:text-yellow-100">
-                +
-              </button>
-            </aside>
+          <aside class="flex justify-end">
+            <a
+              href="/courses/:courseid/chatcreation"
+              id="addChat" class="relative text-3xl font-bold font-serif h-10 w-10 hover: text-center rounded-bl-md border-b-2 border-l-2 border-gray-700 text-gray-900 bg-gradient-to-r from-green-500 to-green-300 hover:text-yellow-100">
+              +
+            </a>
+          </aside>
 
           <h2 class="text-sm px-4 pb-1 text-green-400"> GENERAL </h2>
           <ul class="pl-6">
-            <CourseChatLink name="general" url="/chat" />
-            <CourseChatLink name="homework" url="/chat" />
-            <CourseChatLink name="class-discussion" url="/chat" />
-            <CourseChatLink name="off-topic" url="/chat" />
+            <CourseChatLink name="general" url="/courses/:courseid/chat" />
+            <CourseChatLink name="homework" url="/courses/:courseid/chat" />
+            <CourseChatLink name="class-discussion" url="/courses/:courseid/chat" />
+            <CourseChatLink name="off-topic" url="/courses/:courseid/chat" />
           </ul>
           <h2 class="text-sm px-4 pt-4 pb-1 text-green-400"> OTHER </h2>
           <ul class="pl-6">
-            <CourseChatLink name="welcome" url="/chat" />
-            <CourseChatLink name="rules" url="/chat" />
-            <CourseChatLink name="bot-commands" url="/chat" />
+            <CourseChatLink name="welcome" url="/courses/:courseid/chat" />
+            <CourseChatLink name="rules" url="/courses/:courseid/chat" />
+            <CourseChatLink name="bot-commands" url="/courses/:courseid/chat" />
           </ul>
           <h2 class="text-sm px-4 pt-4 pb-1 text-green-400"> CHATS FROM DB </h2>
           <ul class="pl-6">
