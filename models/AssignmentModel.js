@@ -35,7 +35,7 @@ const AssignmentSchema = new Schema({
   studentPoints: {
     type: [{
       id: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         ref: 'users',
         required: true
       },
@@ -49,7 +49,7 @@ const AssignmentSchema = new Schema({
   assignmentSubmissions: {
     type: [{
       id: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         ref: 'users',
         required: true
       },
