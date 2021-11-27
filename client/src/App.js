@@ -6,14 +6,11 @@ import { setCurrentUser, logoutUser } from "./actions/authActions";
 
 import { Provider } from "react-redux";
 import store from "./store";
-
-import Layout from "./components/layout/Layout";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
-import Dashboard from "./components/dashboard/Dashboard";
-import CourseCreation from "./components/course/CourseCreation";
 import CourseRouter from "./components/course/CourseRouter";
+import UserRouter from "./components/auth/UserRouter";
 import "tailwindcss/tailwind.css"
 
 // Check for token to keep user logged in
@@ -48,27 +45,8 @@ class App extends Component {
               <Route exact path="/register" component={Register} />
               <div>
                 <Switch>
-                  <PrivateRoute path="/dashboard">
-                    <Layout/>
-                    <Dashboard/>
-                  </PrivateRoute>
-                  <PrivateRoute path="/coursecreation">
-                    <Layout/>
-                    <CourseCreation/>
-                  </PrivateRoute>
-                  <PrivateRoute path="/courses">
-                    <Layout/>
-                    <CourseRouter/>
-                  </PrivateRoute>
-                  <PrivateRoute path="/notifications">
-                    <Layout/>
-                  </PrivateRoute>
-                  <PrivateRoute path="/files">
-                    <Layout/>
-                  </PrivateRoute>
-                  <PrivateRoute path="/settings">
-                    <Layout/>
-                  </PrivateRoute>
+                  <PrivateRoute path="/courses" component={CourseRouter} />
+                  <PrivateRoute path="/" component={UserRouter} />
                 </Switch>
               </div>
             </Switch>
