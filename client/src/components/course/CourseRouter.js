@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import { BrowserRouter as Router, Route, Switch, Link, useParams, useRouteMatch } from "react-router-dom";
+import { BrowserRouter as Switch, useParams, useRouteMatch } from "react-router-dom";
 import PrivateRoute from "../private-route/PrivateRoute";
 import Assignments from "./Assignments";
 import AssignmentCreation from "./AssignmentCreation";
@@ -11,11 +11,11 @@ function CourseRouter(props) {
   let { path, url } = useRouteMatch();
   return (
     <Switch>
-      <PrivateRoute path={`${path}/:courseId/assignments`}>
+      <PrivateRoute path={`${path}/:courseId/assignments`} component={Assignments}>
         <Layout />
         <Assignments />
       </PrivateRoute>
-      <PrivateRoute path={`${path}/:courseId/assignmentcreation`}>
+      <PrivateRoute path={`${path}/:courseId/assignmentcreation`} component={AssignmentCreation}>
         <Layout />
         <AssignmentCreation />
       </PrivateRoute>

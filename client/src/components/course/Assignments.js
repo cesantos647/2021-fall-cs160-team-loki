@@ -18,6 +18,7 @@ class Assignments extends Component {
 
   render() {
     var ass_data = null;
+    console.log(this.props.auth)
     return (
       /** isRowLayout is used to set the assignments to column view, rather than row view. To test, change value to false. */
       <div class="flex-col ml-16 bg-gray-800 h-full min-h-screen">
@@ -146,5 +147,8 @@ function AssignmentButton(props) {
   )
 }
 
-export default connect(
-)(Assignments);
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps)(Assignments);
