@@ -1,6 +1,7 @@
 import {
     SET_CURRENT_USER,
-    USER_LOADING
+    USER_LOADING,
+    SET_USER_DATA
   } from "../actions/types";
 
   const isEmpty = require("is-empty");
@@ -8,6 +9,7 @@ import {
   const initialState = {
     isAuthenticated: false,
     user: {},
+    data: {},
     loading: false
   };
 
@@ -24,6 +26,11 @@ import {
         return {
           ...state,
           loading: true
+        };
+      case SET_USER_DATA:
+        return {
+          ...state,
+          data: action.payload
         };
       default:
         return state;
