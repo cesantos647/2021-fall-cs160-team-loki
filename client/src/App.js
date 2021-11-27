@@ -59,6 +59,15 @@ class App extends Component {
                     <Layout/>
                     <CourseRouter/>
                   </PrivateRoute>
+                  <PrivateRoute path="/notifications">
+                    <Layout/>
+                  </PrivateRoute>
+                  <PrivateRoute path="/files">
+                    <Layout/>
+                  </PrivateRoute>
+                  <PrivateRoute path="/settings">
+                    <Layout/>
+                  </PrivateRoute>
                 </Switch>
               </div>
             </Switch>
