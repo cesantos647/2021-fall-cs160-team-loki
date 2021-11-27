@@ -7,8 +7,7 @@ import { setCurrentUser, logoutUser } from "./actions/authActions";
 import { Provider } from "react-redux";
 import store from "./store";
 
-import Navbar from "./components/layout/Navbar";
-import CourseSidebar from "./components/layout/CourseSidebar";
+import Layout from "./components/layout/Layout";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
@@ -27,7 +26,7 @@ if (localStorage.jwtToken) {
   // Set user and isAuthenticated
   store.dispatch(setCurrentUser(decoded));
 
-// Check for expired token
+  // Check for expired token
   const currentTime = Date.now() / 1000; // to get in milliseconds
   if (decoded.exp < currentTime) {
     // Logout user
@@ -41,23 +40,30 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-      <Router>
-        <div className="App">
-          <Switch>
-            <Route exact path="/" component={Login} />
-            <Route exact path="/register" component={Register} />
-            <div>
-              <Navbar component={Navbar}/>
-              <CourseSidebar component={CourseSidebar}/>
-              <Switch>
-                <PrivateRoute path="/dashboard" component={Dashboard}/>
-                <PrivateRoute path="/coursecreation" component={CourseCreation} />
-                <PrivateRoute path="/courses" component={CourseRouter} />
-              </Switch>
-            </div>
-          </Switch>
-        </div>
-      </Router>
+        <Router>
+          <div className="App">
+            <Switch>
+              <Route exact path="/" component={Login} />
+              <Route exact path="/register" component={Register} />
+              <div>
+                <Switch>
+                  <PrivateRoute path="/dashboard">
+                    <Layout/>
+                    <Dashboard/>
+                  </PrivateRoute>
+                  <PrivateRoute path="/coursecreation">
+                    <Layout/>
+                    <CourseCreation/>
+                  </PrivateRoute>
+                  <PrivateRoute path="/courses">
+                    <Layout/>
+                    <CourseRouter/>
+                  </PrivateRoute>
+                </Switch>
+              </div>
+            </Switch>
+          </div>
+        </Router>
       </Provider>
     );
   }

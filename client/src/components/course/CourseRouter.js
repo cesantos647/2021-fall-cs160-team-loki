@@ -4,22 +4,45 @@ import { BrowserRouter as Router, Route, Switch, Link, useParams, useRouteMatch 
 import PrivateRoute from "../private-route/PrivateRoute";
 import Assignments from "./Assignments";
 import AssignmentCreation from "./AssignmentCreation";
+import Layout from "../layout/Layout";
 
-class CourseRouter extends Component {
-  render() {
-    return (
-      <CoursePages /> 
-    )
-  }
-}
-
-function CoursePages(props) {
-  let { courseid } = useParams();
+function CourseRouter(props) {
+  let { courseId } = useParams();
   let { path, url } = useRouteMatch();
   return (
     <Switch>
-      <PrivateRoute path={`${path}/:courseId/assignments`} component={Assignments}/> 
-      <PrivateRoute path={`${path}/:courseId/assignmentcreation`} component={AssignmentCreation} />
+      <PrivateRoute path={`${path}/:courseId/assignments`}>
+        <Layout />
+        <Assignments />
+      </PrivateRoute>
+      <PrivateRoute path={`${path}/:courseId/assignmentcreation`}>
+        <Layout />
+        <AssignmentCreation />
+      </PrivateRoute>
+      <PrivateRoute path={`${path}/:courseId/modules`}>
+        <Layout />
+
+      </PrivateRoute>
+      <PrivateRoute path={`${path}/:courseId/announcements`}>
+        <Layout />
+
+      </PrivateRoute>
+      <PrivateRoute path={`${path}/:courseId/grades`}>
+        <Layout />
+
+      </PrivateRoute>
+      <PrivateRoute path={`${path}/:courseId/files`}>
+        <Layout />
+
+      </PrivateRoute>
+      <PrivateRoute path={`${path}/:courseId/syllabus`}>
+        <Layout />
+
+      </PrivateRoute>
+      <PrivateRoute path={`${path}/:courseId/chat`}>
+        <Layout />
+
+      </PrivateRoute>
     </Switch>
   )
 }
