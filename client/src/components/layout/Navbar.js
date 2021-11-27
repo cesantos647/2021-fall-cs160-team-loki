@@ -10,7 +10,6 @@ class Navbar extends Component {
     this.props.logoutUser();
   };
 
-
   render() {
     const userId = this.props.auth;
     console.log(userId);

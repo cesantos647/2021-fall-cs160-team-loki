@@ -12,7 +12,7 @@ export const registerUser = (userData, history) => dispatch => {
   axios
     .post("/api/users/register", userData)
     .then(res => history.push("/")) // re-direct to login on successful register
-    .catch(err => 
+    .catch(err =>
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
@@ -27,7 +27,7 @@ export const loginUser = userData => dispatch => {
     .then(res => {
       // Save to localStorage
 
-// Set token to localStorage
+      // Set token to localStorage
       const { token, data } = res.data;
       localStorage.setItem("jwtToken", token);
       localStorage.setItem("user", JSON.stringify(data));
@@ -72,12 +72,12 @@ export const logoutUser = () => dispatch => {
 
 export const getUser = (userId, history) => {
   return axios
-      .get(`/api/users/${userId}`)
-      .then(res => {
-        return res.data.data
-      })
-      .catch(err => {
-        console.log(err)
-      }
-      );
+    .get(`/api/users/${userId}`)
+    .then(res => {
+      return res.data.data
+    })
+    .catch(err => {
+      console.log(err)
+    }
+    );
 };
