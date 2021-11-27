@@ -3,8 +3,19 @@ import React, { useState } from 'react'
 function DashboardCard({user, assignment}) {
     const dueDate = new Date(assignment.dueDate);
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-    const studentScore = assignment.studentPoints[user]
-    const submission = assignment.assignmentSubmissions[user]
+    const studentScore = 5
+    for (let i = 0; i < assignment.studentPoints.length; i++) {
+        console.log(Object.keys(assignment.studentPoints[i]))
+        if (Object.keys(assignment.studentPoints[i])[0] == user) {
+            studentScore = Object.values(assignment.studentPoints[i])[0]
+        }
+    }
+    const submission = false
+    for (let i = 0; i < assignment.assignmentSubmissions.length; i++) {
+        if (Object.keys(assignment.assignmentSubmissions[i])[0] == user) {
+            submission = Object.values(assignment.studentPoints[i])[0]
+        }
+    }
     return (
         <div>
             <div className="grid justify-items-center bg-gray-800">

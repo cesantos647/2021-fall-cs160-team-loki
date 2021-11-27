@@ -77,9 +77,6 @@ return (
             <h1 className="text-white text-center text-2xl flow-text grey-text py-8">
               Welcome to the dashboard
             </h1>
-            <div>
-              <h1 className="text-white ">Sorted by due date</h1>
-            </div>
             {this.state.isLoaded ? this.state.assignments.map(assignment => <DashboardCard user={user.id} assignment={assignment}/>) : <div> Loading </div>}
           </div>
         </div>
