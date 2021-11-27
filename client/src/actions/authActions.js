@@ -5,7 +5,8 @@ import jwt_decode from "jwt-decode";
 import {
   GET_ERRORS,
   SET_CURRENT_USER,
-  USER_LOADING
+  USER_LOADING,
+  SET_USER_DATA
 } from "./types";
 
 // Register User
@@ -29,7 +30,7 @@ export const loginUser = userData => dispatch => {
       // Save to localStorage
 
 // Set token to localStorage
-      const { token } = res.data;
+      const { token, data } = res.data;
       localStorage.setItem("jwtToken", token);
       // Set token to Auth header
       setAuthToken(token);
@@ -37,6 +38,7 @@ export const loginUser = userData => dispatch => {
       const decoded = jwt_decode(token);
       // Set current user
       dispatch(setCurrentUser(decoded));
+      dispatch(setUserData(data));
     })
     .catch(err =>
       dispatch({
@@ -58,6 +60,14 @@ export const setCurrentUser = decoded => {
 export const setUserLoading = () => {
   return {
     type: USER_LOADING
+  };
+};
+
+// Set logged in user
+export const setUserData = data => {
+  return {
+    type: SET_USER_DATA,
+    payload: data
   };
 };
 
