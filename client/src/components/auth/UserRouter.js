@@ -9,11 +9,11 @@ import Dashboard from "../dashboard/Dashboard";
 function CourseRouter(props) {
   return (
     <Switch>
-      <PrivateRoute path="/coursecreation" component={CourseCreation}>
+      <PrivateRoute path="/coursecreation">
         <Layout />
         <CourseCreation />
       </PrivateRoute>
-      <PrivateRoute path="/dashboard" component={Dashboard}>
+      <PrivateRoute path="/dashboard">
         <Layout />
         <Dashboard />
       </PrivateRoute>

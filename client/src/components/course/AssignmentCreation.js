@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import classnames from "classnames";
 import FormButton from "../form/FormButton";
@@ -40,7 +41,7 @@ class AssignmentCreation extends Component {
       openDate: this.state.openDate,
       closeDate: this.state.closeDate,
       totalPossiblePoints: this.state.totalPossiblePoints,
-      //description: this.state.description
+      description: this.state.description
     };
 
     this.props.createAssignment(newAssignment, this.props.history, this.props.match.params.courseId);
@@ -171,7 +172,7 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(
-  mapStateToProps,
-  { createAssignment }
-)(AssignmentCreation);
+export default
+  withRouter(
+  connect(mapStateToProps, { createAssignment })
+(AssignmentCreation));

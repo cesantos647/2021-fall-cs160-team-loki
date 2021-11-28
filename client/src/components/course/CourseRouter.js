@@ -11,11 +11,11 @@ function CourseRouter(props) {
   let { path, url } = useRouteMatch();
   return (
     <Switch>
-      <PrivateRoute path={`${path}/:courseId/assignments`} component={Assignments}>
+      <PrivateRoute path={`${path}/:courseId/assignments`}>
         <Layout />
         <Assignments />
       </PrivateRoute>
-      <PrivateRoute path={`${path}/:courseId/assignmentcreation`} component={AssignmentCreation}>
+      <PrivateRoute path={`${path}/:courseId/assignmentcreation`}>
         <Layout />
         <AssignmentCreation />
       </PrivateRoute>

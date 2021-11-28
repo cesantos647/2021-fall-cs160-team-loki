@@ -39,7 +39,7 @@ class Assignments extends Component {
         </div>
 
         <div class="fixed right-0 bottom-0 mb-2 mr-2">
-          <FloatButton label="+" bgcolor="bg-blue-600" url="/courses/:courseid/assignmentcreation" isaddbtn={true}/>
+          <FloatButton label="+" bgcolor="blue" url="/courses/:courseid/assignmentcreation" isaddbtn={true}/>
         </div>
 
         <div class={`ml-1 ${this.state.isRowLayout ? 'grid' : 'flex'}`}>

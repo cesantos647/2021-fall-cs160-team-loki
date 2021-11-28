@@ -1,4 +1,4 @@
-import React, { useHistory } from "react-router-dom";
+import React from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
@@ -70,11 +70,11 @@ const Navbar = (props) => {
         <div className="overflow-y-auto">
           <ul>
             <div className="animate-pulse">
-              <FloatButton label="+" bgcolor="bg-gray-900" url="/coursecreation" isaddbtn={true} />
+              <FloatButton label="+" bgcolor="gray" url="/coursecreation" isaddbtn={true} />
             </div>
-            <FloatButton label="CS 185C" bgcolor="bg-indigo-500" url="/courses/:courseid/chat" />
-            <FloatButton label="CS 157A" bgcolor="bg-pink-500" url="/courses/:courseid/chat" />
-            <FloatButton label="CS 160" bgcolor="bg-purple-500" url="/courses/:courseid/chat" isselected={true} />
+            <FloatButton label="CS 185C" bgcolor="indigo" url="/courses/:courseid/chat" />
+            <FloatButton label="CS 157A" bgcolor="pink" url="/courses/:courseid/chat" />
+            <FloatButton label="CS 160" bgcolor="purple" url="/courses/:courseid/chat" isselected={true} />
           </ul>
         </div>
       </aside>

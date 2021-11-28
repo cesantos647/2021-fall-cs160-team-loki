@@ -32,7 +32,7 @@ class CourseCreation extends Component {
 
     const newCourse = {
       courseName: this.state.courseName,
-      courseSection: this.state.courseSection,
+      courseSection: this.state.courseSection
     };
 
     this.props.createCourse(newCourse, this.props.history);
@@ -72,14 +72,15 @@ class CourseCreation extends Component {
             </label>
             <input
               onChange={this.onChange}
-              value={this.state.section}
-              error={errors.section}
+              value={this.state.courseSection}
+              error={errors.error}
               id="courseSection"
               type="text"
               className={classnames("shadow appearance-none border bg-gray-200 focus:bg-white rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", {
                 invalid: errors.error
               })} />
           </div>
+
 
           <span className="text-xs italic text-red-500">
             {errors.error}
