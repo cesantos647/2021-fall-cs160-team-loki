@@ -1,37 +1,36 @@
 import React from "react";
 import { connect } from "react-redux";
-import { BrowserRouter as Switch } from "react-router-dom";
-import PrivateRoute from "../private-route/PrivateRoute";
+import { BrowserRouter as Route, Switch } from "react-router-dom";
 import Layout from "../layout/Layout";
 import CourseCreation from "../course/CourseCreation";
 import Dashboard from "../dashboard/Dashboard";
 
-function CourseRouter(props) {
+function UserRouter(props) {
   return (
     <Switch>
-      <PrivateRoute path="/coursecreation">
+      <Route path="/coursecreation">
         <Layout />
         <CourseCreation />
-      </PrivateRoute>
-      <PrivateRoute path="/dashboard">
+      </Route>
+      <Route path="/dashboard">
         <Layout />
         <Dashboard />
-      </PrivateRoute>
-      <PrivateRoute path="/notifications">
+      </Route>
+      <Route path="/notifications">
         <Layout />
 
-      </PrivateRoute>
-      <PrivateRoute path="/files">
+      </Route>
+      <Route path="/files">
         <Layout />
 
-      </PrivateRoute>
-      <PrivateRoute path="/settings">
+      </Route>
+      <Route path="/settings">
         <Layout />
 
-      </PrivateRoute>
+      </Route>
     </Switch>
   )
 }
 
 export default connect(
-)(CourseRouter);
+)(UserRouter);

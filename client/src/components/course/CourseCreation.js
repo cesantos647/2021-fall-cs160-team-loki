@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import classnames from "classnames";
 import FormButton from "../form/FormButton";
@@ -34,7 +35,7 @@ class CourseCreation extends Component {
       courseName: this.state.courseName,
       courseSection: this.state.courseSection
     };
-
+    console.log(this.props);
     this.props.createCourse(newCourse, this.props.history);
   };
 
@@ -97,14 +98,14 @@ class CourseCreation extends Component {
 
 CourseCreation.propTypes = {
   createCourse: PropTypes.func.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(
-  mapStateToProps,
-  { createCourse }
-)(CourseCreation);
+export default
+  withRouter(
+  connect(mapStateToProps, { createCourse })
+(CourseCreation));

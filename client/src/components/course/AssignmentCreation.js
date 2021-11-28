@@ -15,7 +15,7 @@ class AssignmentCreation extends Component {
       openDate: new Date(),
       closeDate: new Date(),
       totalPossiblePoints: '',
-      description: "",
+      assignmentDescription: "",
       errors: {}
     };
   }
@@ -41,7 +41,7 @@ class AssignmentCreation extends Component {
       openDate: this.state.openDate,
       closeDate: this.state.closeDate,
       totalPossiblePoints: this.state.totalPossiblePoints,
-      description: this.state.description
+      assignmentDescription: this.state.assignmentDescription
     };
 
     this.props.createAssignment(newAssignment, this.props.history, this.props.match.params.courseId);
@@ -70,6 +70,22 @@ class AssignmentCreation extends Component {
               error={errors.error}
               id="assignmentName"
               type="text"
+              className={classnames("shadow appearance-none border bg-gray-200 focus:bg-white rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", {
+                invalid: errors.error
+              })} />
+          </div>
+
+          
+          <div className="my-4">
+            <label class="block text-gray-300 text-sm font-bold mb-2">
+              Open Date (MM-dd-YYYY)
+            </label>
+            <input
+              onChange={this.onChange}
+              value={this.state.openDate}
+              error={errors.error}
+              id="openDate"
+              type="date"
               className={classnames("shadow appearance-none border bg-gray-200 focus:bg-white rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", {
                 invalid: errors.error
               })} />
@@ -107,21 +123,6 @@ class AssignmentCreation extends Component {
 
           <div className="my-4">
             <label class="block text-gray-300 text-sm font-bold mb-2">
-              Open Date (MM-dd-YYYY)
-            </label>
-            <input
-              onChange={this.onChange}
-              value={this.state.openDate}
-              error={errors.error}
-              id="openDate"
-              type="date"
-              className={classnames("shadow appearance-none border bg-gray-200 focus:bg-white rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", {
-                invalid: errors.error
-              })} />
-          </div>
-
-          <div className="my-4">
-            <label class="block text-gray-300 text-sm font-bold mb-2">
               Total Possible Points
             </label>
             <input
@@ -141,9 +142,9 @@ class AssignmentCreation extends Component {
             </label>
             <textarea
               onChange={this.onChange}
-              value={this.state.description}
+              value={this.state.assignmentDescription}
               error={errors.error}
-              id="description"
+              id="assignmentDescription"
               type="text"
               className={classnames("form-textarea block mt-1 shadow appearance-none border bg-gray-200 focus:bg-white rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", {
                 invalid: errors.error

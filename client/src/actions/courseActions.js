@@ -18,8 +18,8 @@ export const createCourse = (courseData, history) => dispatch => {
     .post("/api/courses", courseData)
     .then(res => {
       let courseId = res.data.data.courseId
-      console.log("New Course ID: " + courseId);
-      history.push(`/courses/${courseId}/chat`)
+      console.log("New course created /w ID: " + courseId)
+      history.push(`/dashboard`)
     })
     .catch(err =>
       dispatch({

@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { BrowserRouter as Switch, useParams, useRouteMatch } from "react-router-dom";
-import PrivateRoute from "../private-route/PrivateRoute";
+import { BrowserRouter as Route, Switch, useParams, useRouteMatch } from "react-router-dom";
 import Assignments from "./Assignments";
 import AssignmentCreation from "./AssignmentCreation";
 import Layout from "../layout/Layout";
@@ -11,38 +10,38 @@ function CourseRouter(props) {
   let { path, url } = useRouteMatch();
   return (
     <Switch>
-      <PrivateRoute path={`${path}/:courseId/assignments`}>
+      <Route path={`${path}/:courseId/assignments`}>
         <Layout />
         <Assignments />
-      </PrivateRoute>
-      <PrivateRoute path={`${path}/:courseId/assignmentcreation`}>
+      </Route>
+      <Route path={`${path}/:courseId/assignmentcreation`}>
         <Layout />
         <AssignmentCreation />
-      </PrivateRoute>
-      <PrivateRoute path={`${path}/:courseId/modules`}>
+      </Route>
+      <Route path={`${path}/:courseId/modules`}>
         <Layout />
 
-      </PrivateRoute>
-      <PrivateRoute path={`${path}/:courseId/announcements`}>
+      </Route>
+      <Route path={`${path}/:courseId/announcements`}>
         <Layout />
 
-      </PrivateRoute>
-      <PrivateRoute path={`${path}/:courseId/grades`}>
+      </Route>
+      <Route path={`${path}/:courseId/grades`}>
         <Layout />
 
-      </PrivateRoute>
-      <PrivateRoute path={`${path}/:courseId/files`}>
+      </Route>
+      <Route path={`${path}/:courseId/files`}>
         <Layout />
 
-      </PrivateRoute>
-      <PrivateRoute path={`${path}/:courseId/syllabus`}>
+      </Route>
+      <Route path={`${path}/:courseId/syllabus`}>
         <Layout />
 
-      </PrivateRoute>
-      <PrivateRoute path={`${path}/:courseId/chat`}>
+      </Route>
+      <Route path={`${path}/:courseId/chat`}>
         <Layout />
 
-      </PrivateRoute>
+      </Route>
     </Switch>
   )
 }
