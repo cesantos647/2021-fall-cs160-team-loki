@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch, useHistory } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
@@ -35,10 +35,9 @@ if (localStorage.jwtToken) {
 }
 
 const App = () => {
-  const history = useHistory();
   return (
     <Provider store={store}>
-      <Router history={history}>
+      <Router>
         <div className="App">
           <Switch>
             <Route exact path="/" component={Login} />

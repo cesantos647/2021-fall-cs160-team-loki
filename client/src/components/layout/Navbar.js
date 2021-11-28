@@ -1,4 +1,4 @@
-import React from "react-router-dom";
+import React, { useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
@@ -10,9 +10,10 @@ const Navbar = (props) => {
     props.logoutUser();
   };
 
-
-  const userId = props.auth;
-  console.log(userId);
+  const { courseId } = useParams()
+  const userId = props.auth
+  console.log(userId)
+  console.log(courseId)
   return (
     <div className="bg-gray-700">
       <aside className="fixed z-30 grid h-full grid-rows-1 text-yellow-400 bg-blue-900 border-r-2 border-gray-700 shadow">

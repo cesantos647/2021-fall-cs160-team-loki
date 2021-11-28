@@ -19,7 +19,8 @@ export const createCourse = (courseData, history) => dispatch => {
     .then(res => {
       let courseId = res.data.data.courseId
       console.log("New course created /w ID: " + courseId)
-      history.push(`/dashboard`)
+      history.push(`/courses/${courseId}/assignments`)
+      history.go(0)
     })
     .catch(err =>
       dispatch({
