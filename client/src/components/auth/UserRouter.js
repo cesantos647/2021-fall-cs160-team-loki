@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { BrowserRouter as Route, Switch } from "react-router-dom";
+import PrivateRoute from "../private-route/PrivateRoute";
 import Layout from "../layout/Layout";
 import CourseCreation from "../course/CourseCreation";
 import Dashboard from "../dashboard/Dashboard";
@@ -8,26 +9,26 @@ import Dashboard from "../dashboard/Dashboard";
 function UserRouter(props) {
   return (
     <Switch>
-      <Route path="/coursecreation">
+      <PrivateRoute path="/coursecreation">
         <Layout />
         <CourseCreation />
-      </Route>
-      <Route path="/dashboard">
+      </PrivateRoute>
+      <PrivateRoute path="/dashboard">
         <Layout />
         <Dashboard />
-      </Route>
-      <Route path="/notifications">
+      </PrivateRoute>
+      <PrivateRoute path="/notifications">
         <Layout />
 
-      </Route>
-      <Route path="/files">
+      </PrivateRoute>
+      <PrivateRoute path="/files">
         <Layout />
 
-      </Route>
-      <Route path="/settings">
+      </PrivateRoute>
+      <PrivateRoute path="/settings">
         <Layout />
 
-      </Route>
+      </PrivateRoute>
     </Switch>
   )
 }
