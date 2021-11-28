@@ -20,7 +20,6 @@ export const createAssignment = (assignmentData, history, courseId) => dispatch 
       let assignmentId = res.data.data.assignmentId
       console.log("New Assignment ID: " + assignmentId);
       history.push(`/courses/${courseId}/assignments`)
-      history.go(0)
     })
     .catch(err =>
       dispatch({

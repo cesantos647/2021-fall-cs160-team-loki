@@ -1,5 +1,5 @@
 import axios from "axios";
-import {GET_ERRORS} from "./types"
+import { GET_ERRORS } from "./types"
 
 export const getCourseDetails = (courseId, history) => {
   return axios
@@ -14,13 +14,13 @@ export const getCourseDetails = (courseId, history) => {
 };
 
 export const createCourse = (courseData, history) => dispatch => {
-  axios
+  return axios
     .post("/api/courses", courseData)
     .then(res => {
       let courseId = res.data.data.courseId
       console.log("New course created /w ID: " + courseId)
       history.push(`/courses/${courseId}/assignments`)
-      history.go(0)
+      return courseId
     })
     .catch(err =>
       dispatch({
@@ -29,3 +29,11 @@ export const createCourse = (courseData, history) => dispatch => {
       })
     );
 };
+
+export const addUserToCourse = (userId, courseId) => dispatch => {
+  axios
+    .put(`/api/courses/${courseId}/${userId}`)
+    .catch(err =>
+      console.log(err)
+    );
+}

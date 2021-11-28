@@ -4,14 +4,15 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import classnames from "classnames";
 import FormButton from "../form/FormButton";
-import { createCourse } from "../../actions/courseActions"
+import { createCourse, addUserToCourse } from "../../actions/courseActions"
 
 class CourseCreation extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       courseName: "",
       courseSection: "",
+      courseColor: "",
       errors: {}
     };
   }
@@ -28,15 +29,18 @@ class CourseCreation extends Component {
     this.setState({ [e.target.id]: e.target.value });
   };
 
-  onSubmit = e => {
+  onSubmit = async e => {
     e.preventDefault();
-
+    
     const newCourse = {
       courseName: this.state.courseName,
-      courseSection: this.state.courseSection
+      courseSection: this.state.courseSection,
+      courseColor: this.state.courseColor
     };
     console.log(this.props);
-    this.props.createCourse(newCourse, this.props.history);
+    const courseId = await this.props.createCourse(newCourse, this.props.history);
+    console.log(courseId)
+    this.props.addUserToCourse(this.props.auth.user.id, courseId)
   };
 
   render() {
@@ -82,6 +86,28 @@ class CourseCreation extends Component {
               })} />
           </div>
 
+          <div className="my-4">
+            <label class="block text-gray-300 text-sm font-bold mb-2">
+              Course Color (
+                <span className="text-red-500"> red </span>|
+                <span className="text-yellow-500"> yellow </span>|
+                <span className="text-green-500"> green </span>|
+                <span className="text-blue-500"> blue </span>|
+                <span className="text-indigo-500"> indigo </span>|
+                <span className="text-purple-500"> purple </span>|
+                <span className="text-pink-500"> pink </span>)
+            </label>
+            <input
+              onChange={this.onChange}
+              value={this.state.courseColor}
+              error={errors.error}
+              id="courseColor"
+              type="text"
+              className={classnames("shadow appearance-none border bg-gray-200 focus:bg-white rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", {
+                invalid: errors.error
+              })} />
+          </div>
+
 
           <span className="text-xs italic text-red-500">
             {errors.error}
@@ -98,14 +124,17 @@ class CourseCreation extends Component {
 
 CourseCreation.propTypes = {
   createCourse: PropTypes.func.isRequired,
+  addUserToCourse: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  errors: state.errors
+  errors: state.errors,
+  auth: state.auth
 });
 
 export default
   withRouter(
-  connect(mapStateToProps, { createCourse })
+  connect(mapStateToProps, { createCourse, addUserToCourse })
 (CourseCreation));

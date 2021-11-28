@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
 const CourseSidebar = (props) => {
   const [showSidebar, toggleSidebar] = useState(false)
   const { courseId } = useParams();
-  console.log(courseId);
 
   return (
     <div className="fixed z-40 items-center ml-12 align-middle">

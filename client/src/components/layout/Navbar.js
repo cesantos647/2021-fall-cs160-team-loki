@@ -1,7 +1,9 @@
+import { Component } from "react";
 import React, { useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
+import { getCourseDetails } from "../../actions/courseActions";
 import FloatButton from "./FloatButton";
 
 const Navbar = (props) => {
@@ -10,10 +12,27 @@ const Navbar = (props) => {
     props.logoutUser();
   };
 
+  const getCourse = async (courseId) => {
+    return await getCourseDetails(courseId)
+    .then(res => {
+      // Course data doesn't include its id. Add it.
+      res["courseId"] = courseId
+      return res;
+    })
+  }
+
+  const authProps = props.auth
   const { courseId } = useParams()
-  const userId = props.auth
-  console.log(userId)
-  console.log(courseId)
+  const userId = props.auth.user.id
+  const userCourseIds = props.auth.user.courseIds
+  console.log(authProps)
+  console.log("UserID: " + userId)
+  console.log("CourseID: " + courseId)
+
+  // Get user's courses' info (name, color)
+  const userCourseData = userCourseIds ? userCourseIds.map(id => getCourse(id)) : []
+  console.log(userCourseData)
+
   return (
     <div className="bg-gray-700">
       <aside className="fixed z-30 grid h-full grid-rows-1 text-yellow-400 bg-blue-900 border-r-2 border-gray-700 shadow">
@@ -73,7 +92,7 @@ const Navbar = (props) => {
             <div className="animate-pulse">
               <FloatButton label="+" bgcolor="gray" url="/coursecreation" isaddbtn={true} />
             </div>
-            <FloatButton label="CS 185C" bgcolor="indigo" url="/courses/:courseid/chat" />
+            {userCourseData.map(course => <FloatButton label={course.courseName} color={course.courseColor} url={`/courses/${course.courseId}/chat`} />)}
             <FloatButton label="CS 157A" bgcolor="pink" url="/courses/:courseid/chat" />
             <FloatButton label="CS 160" bgcolor="purple" url="/courses/:courseid/chat" isselected={true} />
           </ul>
@@ -82,7 +101,6 @@ const Navbar = (props) => {
     </div>
   );
 }
-
 
 function PageButton(props) {
   return (
@@ -97,6 +115,7 @@ function PageButton(props) {
 }
 
 Navbar.propTypes = {
+  getCourseDetails: PropTypes.func.isRequired,
   logoutUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
 };
@@ -107,5 +126,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { logoutUser }
+  { logoutUser, getCourseDetails }
 )(Navbar);
