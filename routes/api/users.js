@@ -8,6 +8,7 @@ const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
 // Load User model
 const User = require("../../models/User");
+const Course = require("../../models/CourseModel");
 const { userAllDataToObject } = require('../../lib/mongo/usersToObject');
 
 // @route POST api/users/register
@@ -119,6 +120,33 @@ router.get('/:userID', (req, res) => {
       return res.status(200).json({ status: "success", data: userAllDataToObject(user) })
     })
     .catch(() => res.status(404).json({ status: "failure", error: "user not found"}))
+});
+
+// Get assignments from user ID
+router.get('/:userID/assignments', async (req, res) => {
+  
+  if(!req.params.userID) return res.status(400).json({ status: "failure", error: "missing userID" })
+
+  let courseIds = await User.findOne({ _id: req.params.userID })
+    .then(user => user.courseIds)
+    .catch(() => null)
+  
+  console.log(courseIds)
+
+  if(courseIds === null) return res.status(404).json({ status: "failure", error: "user not found"})
+  else if(!courseIds.length) return res.status(404).json({ status: "failure", error: "user has no courses"})
+
+  let assignmentIds = await Promise.all(courseIds.map(async (courseId) => await Course.findOne({ _id: courseId })
+    .then(course => course.assignmentIds)
+    .catch(() => [])
+  ))
+
+  let zipped = {}
+  courseIds.map((courseId, index) => {
+    zipped[courseId] = assignmentIds[index]
+  })
+
+  return res.status(200).json({ status: "success ", data: zipped });
 });
 
 module.exports = router;
