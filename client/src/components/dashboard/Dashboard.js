@@ -36,9 +36,10 @@ class Dashboard extends Component {
 
   // on page load
   async componentDidMount() {
-    const userId = await this.props.auth.user.id    // get userID (who is logged in)
-    const user = await getUser(userId)              // axios call to get user (authActions -> routes/api/users.js)
-    this.setState({ user: user })                   // put response into state d
+    const userId = await this.props.auth.user.id        // get userID (who is logged in)
+    const user = await getUser(userId)                  // axios call to get user (authActions -> routes/api/users.js)
+    localStorage.setItem("user", JSON.stringify(user)); // update user data in localStorage
+    this.setState({ user: user })                       // put response into state d
 
     const promises = this.state.user.courseIds ? this.state.user.courseIds.map(id => this.getCourse(id)) : []  // get array of promises
     const courses = await Promise.all(promises)                               // retrieve data from promises (the course objects)
