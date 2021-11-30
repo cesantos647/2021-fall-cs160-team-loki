@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
 import classnames from "classnames";
 import Background from '../../images/towerhall.jpg';
-import { data } from "autoprefixer";
 
 const bgImage = {
   backgroundImage: `url(${Background})`
@@ -76,13 +75,13 @@ class Register extends Component {
             <h1 className="inline text-white">NAC</h1>
           </div>
           <div className="my-auto">
-            <label class="block pl-12 pb-4 text-2xl text-gray-200 mb-2" for="username">
+            <label className="block pb-4 pl-12 mb-2 text-2xl text-gray-200" for="username">
               Register
             </label>
             <div className="px-12">
               <form noValidate onSubmit={this.onSubmit} className="">
                 <div className="mb-4">
-                  <label class="block text-gray-300 text-sm font-bold mb-2" for="username">
+                  <label className="block mb-2 text-sm font-bold text-gray-300" for="username">
                     Name
                   </label>
                   <input
@@ -101,7 +100,7 @@ class Register extends Component {
                   </span>
                 </div>
                 <div className="mb-4">
-                  <label class="block text-gray-300 text-sm font-bold mb-2" for="username">
+                  <label className="block mb-2 text-sm font-bold text-gray-300" for="username">
                     Email
                   </label>
                   <input
@@ -120,7 +119,7 @@ class Register extends Component {
                   </span>
                 </div>
                 <div className="mb-4">
-                  <label class="block text-gray-300 text-sm font-bold mb-2" for="username">
+                  <label className="block mb-2 text-sm font-bold text-gray-300" for="username">
                     Password
                   </label>
                   <input
@@ -139,7 +138,7 @@ class Register extends Component {
                   </span>
                 </div>
                 <div className="mb-4">
-                  <label class="block text-gray-300 text-sm font-bold mb-2" for="username">
+                  <label className="block mb-2 text-sm font-bold text-gray-300" for="username">
                     Confirm Password
                   </label>
                   <input

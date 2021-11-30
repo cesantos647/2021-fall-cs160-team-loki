@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import classnames from "classnames";
 import FormButton from "../form/FormButton";
 import { createAssignment } from "../../actions/assignmentActions"
+import { addAssignmentToCourse } from "../../actions/courseActions"
 
 class AssignmentCreation extends Component {
   constructor() {
@@ -32,7 +33,7 @@ class AssignmentCreation extends Component {
     this.setState({ [e.target.id]: e.target.value });
   };
 
-  onSubmit = e => {
+  onSubmit = async (e) => {
     e.preventDefault();
 
     const newAssignment = {
@@ -44,7 +45,9 @@ class AssignmentCreation extends Component {
       assignmentDescription: this.state.assignmentDescription
     };
 
-    this.props.createAssignment(newAssignment, this.props.history, this.props.match.params.courseId);
+    const assignmentId = await this.props.createAssignment(newAssignment, this.props.history, this.props.match.params.courseId);
+    // Currently doesn't work until backend changed. See courseActions.js.
+    this.props.addAssignmentToCourse(this.props.match.params.courseId, assignmentId)
   };
 
   render() {
@@ -166,6 +169,7 @@ class AssignmentCreation extends Component {
 
 AssignmentCreation.propTypes = {
   createAssignment: PropTypes.func.isRequired,
+  addAssignmentToCourse: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired
 };
 
@@ -175,5 +179,5 @@ const mapStateToProps = state => ({
 
 export default
   withRouter(
-  connect(mapStateToProps, { createAssignment })
+  connect(mapStateToProps, { createAssignment, addAssignmentToCourse })
 (AssignmentCreation));

@@ -30,9 +30,18 @@ export const createCourse = (courseData, history) => dispatch => {
     );
 };
 
-export const addUserToCourse = (userId, courseId) => dispatch => {
+export const addUserToCourse = (courseId, userId) => dispatch => {
   axios
     .put(`/api/courses/${courseId}/${userId}`)
+    .catch(err =>
+      console.log(err)
+    );
+}
+
+// URL currently doesn't exist; backend needs to add a way to add an assignment to a course.
+export const addAssignmentToCourse = (courseId, assignmentId) => dispatch => {
+  axios
+    .put(`/api/courses/${courseId}/${assignmentId}`)
     .catch(err =>
       console.log(err)
     );

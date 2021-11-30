@@ -1,14 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
-import { BrowserRouter as Route, Switch, useParams, useRouteMatch } from "react-router-dom";
+import { BrowserRouter as Switch, useRouteMatch } from "react-router-dom";
 import PrivateRoute from "../private-route/PrivateRoute";
 import Assignments from "./Assignments";
 import AssignmentCreation from "./AssignmentCreation";
 import Layout from "../layout/Layout";
 
-function CourseRouter(props) {
-  let { courseId } = useParams();
-  let { path, url } = useRouteMatch();
+function CourseRouter() {
+  let { path } = useRouteMatch();
   return (
     <Switch>
       <PrivateRoute path={`${path}/:courseId/assignments`}>
