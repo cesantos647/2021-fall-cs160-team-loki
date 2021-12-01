@@ -31,12 +31,10 @@ beforeAll(async () => {
     .then(response => {
       expect(response.statusCode).toBe(200);
       token = response.body.token
-      console.log(token)
       userId = jwtDecode(token).id;
     });
 });
 describe("Test functionality", () => {
-  console.log(token)
     let courseId;
     test("Create Course", () => {
         return request(app)
