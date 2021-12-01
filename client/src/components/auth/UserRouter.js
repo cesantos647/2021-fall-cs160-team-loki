@@ -6,14 +6,14 @@ import Layout from "../layout/Layout";
 import CourseCreation from "../course/CourseCreation";
 import Dashboard from "../dashboard/Dashboard";
 
-function CourseRouter(props) {
+function UserRouter() {
   return (
     <Switch>
-      <PrivateRoute path="/coursecreation" component={CourseCreation}>
+      <PrivateRoute path="/coursecreation">
         <Layout />
         <CourseCreation />
       </PrivateRoute>
-      <PrivateRoute path="/dashboard" component={Dashboard}>
+      <PrivateRoute path="/dashboard">
         <Layout />
         <Dashboard />
       </PrivateRoute>
@@ -34,4 +34,4 @@ function CourseRouter(props) {
 }
 
 export default connect(
-)(CourseRouter);
+)(UserRouter);

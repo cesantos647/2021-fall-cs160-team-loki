@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 
 const CourseSidebar = (props) => {
   const [showSidebar, toggleSidebar] = useState(false)
-  const { courseId } = useParams();
-  console.log(courseId);
+  const [courseId] = useState(useParams().courseId);
 
   return (
     <div className="fixed z-40 items-center ml-12 align-middle">
-      <Sidebar showsidebar={showSidebar} courseid={courseId===undefined ? 1231231234 : courseId} />
+      <Sidebar showsidebar={showSidebar} courseid={courseId===undefined ? 404 : courseId} />
+      { courseId ?
       <aside className="flex items-center h-screen align-middle">
         <button onClick={() => toggleSidebar(!showSidebar)} className="fixed block w-10 h-10 overflow-hidden text-gray-700 bg-gray-900 border-2 border-gray-700 rounded-full hover:border-yellow-200">
           {
@@ -34,6 +34,7 @@ const CourseSidebar = (props) => {
           }
         </button>
       </aside>
+      : <></>}
     </div >
   );
 }

@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import classnames from "classnames";
 import FormButton from "../form/FormButton";
-import { createAssignment } from "../../actions/assignmentActions"
+import { createCourseAssignment } from "../../actions/assignmentActions"
 
 class AssignmentCreation extends Component {
   constructor() {
@@ -14,7 +15,7 @@ class AssignmentCreation extends Component {
       openDate: new Date(),
       closeDate: new Date(),
       totalPossiblePoints: '',
-      description: "",
+      assignmentDescription: "",
       errors: {}
     };
   }
@@ -31,7 +32,7 @@ class AssignmentCreation extends Component {
     this.setState({ [e.target.id]: e.target.value });
   };
 
-  onSubmit = e => {
+  onSubmit = async (e) => {
     e.preventDefault();
 
     const newAssignment = {
@@ -40,10 +41,10 @@ class AssignmentCreation extends Component {
       openDate: this.state.openDate,
       closeDate: this.state.closeDate,
       totalPossiblePoints: this.state.totalPossiblePoints,
-      //description: this.state.description
+      assignmentDescription: this.state.assignmentDescription
     };
-
-    this.props.createAssignment(newAssignment, this.props.history, this.props.match.params.courseId);
+  
+    await this.props.createCourseAssignment(newAssignment, this.props.history, this.props.match.params.courseId);
   };
 
   render() {
@@ -69,6 +70,22 @@ class AssignmentCreation extends Component {
               error={errors.error}
               id="assignmentName"
               type="text"
+              className={classnames("shadow appearance-none border bg-gray-200 focus:bg-white rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", {
+                invalid: errors.error
+              })} />
+          </div>
+
+          
+          <div className="my-4">
+            <label class="block text-gray-300 text-sm font-bold mb-2">
+              Open Date (MM-dd-YYYY)
+            </label>
+            <input
+              onChange={this.onChange}
+              value={this.state.openDate}
+              error={errors.error}
+              id="openDate"
+              type="date"
               className={classnames("shadow appearance-none border bg-gray-200 focus:bg-white rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", {
                 invalid: errors.error
               })} />
@@ -106,21 +123,6 @@ class AssignmentCreation extends Component {
 
           <div className="my-4">
             <label class="block text-gray-300 text-sm font-bold mb-2">
-              Open Date (MM-dd-YYYY)
-            </label>
-            <input
-              onChange={this.onChange}
-              value={this.state.openDate}
-              error={errors.error}
-              id="openDate"
-              type="date"
-              className={classnames("shadow appearance-none border bg-gray-200 focus:bg-white rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", {
-                invalid: errors.error
-              })} />
-          </div>
-
-          <div className="my-4">
-            <label class="block text-gray-300 text-sm font-bold mb-2">
               Total Possible Points
             </label>
             <input
@@ -140,9 +142,9 @@ class AssignmentCreation extends Component {
             </label>
             <textarea
               onChange={this.onChange}
-              value={this.state.description}
+              value={this.state.assignmentDescription}
               error={errors.error}
-              id="description"
+              id="assignmentDescription"
               type="text"
               className={classnames("form-textarea block mt-1 shadow appearance-none border bg-gray-200 focus:bg-white rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", {
                 invalid: errors.error
@@ -163,7 +165,7 @@ class AssignmentCreation extends Component {
 }
 
 AssignmentCreation.propTypes = {
-  createAssignment: PropTypes.func.isRequired,
+  createCourseAssignment: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired
 };
 
@@ -171,7 +173,7 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(
-  mapStateToProps,
-  { createAssignment }
-)(AssignmentCreation);
+export default
+  withRouter(
+  connect(mapStateToProps, { createCourseAssignment })
+(AssignmentCreation));

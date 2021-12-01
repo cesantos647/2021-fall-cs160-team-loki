@@ -74,14 +74,14 @@ class Login extends Component {
           </div>
           <div className="my-auto">
             <div>
-              <label class="block pl-12 pb-4 text-2xl text-gray-200 mb-2" for="username">
+              <label className="block pb-4 pl-12 mb-2 text-2xl text-gray-200" for="username">
                 Sign in
               </label>
             </div>
             <div className="px-12">
               <form noValidate onSubmit={this.onSubmit}>
                 <div className="mb-4">
-                  <label class="block text-gray-300 text-sm font-bold mb-2" for="username">
+                  <label className="block mb-2 text-sm font-bold text-gray-300" for="username">
                     Email
                   </label>
                   <input
@@ -101,7 +101,7 @@ class Login extends Component {
                   </span>
                 </div>
                 <div className="">
-                  <label class="block text-gray-300 text-sm font-bold mb-2" for="username">
+                  <label className="block mb-2 text-sm font-bold text-gray-300" for="username">
                     Password
                   </label>
                   <input

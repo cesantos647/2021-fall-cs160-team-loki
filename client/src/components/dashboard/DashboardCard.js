@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 function DashboardCard({user, assignment}) {
     const dueDate = new Date(assignment.dueDate);
@@ -15,12 +15,12 @@ function DashboardCard({user, assignment}) {
 
     return (
         <div>
-            <div className="grid justify-items-center bg-gray-800">
-                <div className="flex justify-between block border-solid border-4 border-blue-700 my-4 w-4/5 p-4 bg-gray-700 text-white">
+            <div className="grid bg-gray-800 justify-items-center">
+                <div className="flex justify-between w-4/5 p-4 my-4 text-white bg-gray-700 border-4 border-blue-700 border-solid">
                     <div>
                         <h2 className="text-xl">{assignment.assignmentName}</h2>
                         <div className="flex">
-                            <h2 className="pr-5 text-pink-400 font-semibold">Due: {months[dueDate.getMonth()]}. {dueDate.getDate()}</h2>
+                            <h2 className="pr-5 font-semibold text-pink-400">Due: {months[dueDate.getMonth()]}. {dueDate.getDate()}</h2>
                             {submission ? <h3 className="text-green-500">Submitted</h3>: <h3 className="text-red-500">No submission</h3>}
                         </div>
                     </div>
