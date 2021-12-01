@@ -131,8 +131,6 @@ router.get('/:userID/assignments', async (req, res) => {
     .then(user => user.courseIds)
     .catch(() => null)
   
-  console.log(courseIds)
-
   if(courseIds === null) return res.status(404).json({ status: "failure", error: "user not found"})
   else if(!courseIds.length) return res.status(404).json({ status: "failure", error: "user has no courses"})
 

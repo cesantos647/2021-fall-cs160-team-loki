@@ -5,6 +5,7 @@ const passport = require('passport')
 require('../../config/passport')
 
 const Assignment = require("../../models/AssignmentModel");
+const Course = require("../../models/CourseModel");
 
 const validateAssignmentInput = require('../../validation/assignmentValidation');
 
@@ -73,6 +74,31 @@ router.delete("/:assignmentId", passport.authenticate('jwt', {session: false}), 
       return res.status(200).json({ status: "success" })
     })
     .catch(() => res.status(404).json({ status: "failure", error: "assignment not found" }))
+});
+
+router.post('/:courseId', passport.authenticate('jwt', {session: false}), async (req, res) => {
+
+  if(!req.params.courseId) return res.status(400).json({ status: "failure", error: "missing assignmentId" })
+
+  const { data, error } = validateAssignmentInput.validate(req.body);
+
+  if(error) return res.status(400).json({ status: "failure", error: error.details[0].message });
+
+  if(!req.body.closeDate) req.body.closeDate = req.body.dueDate;
+  req.body.professorId = req.user._id.toString()
+  const newAssignment = new Assignment(req.body);
+  let assignment = await newAssignment.save()
+    .then(assignment => assignment)
+    .catch(() => undefined);
+  
+  if(!assignment) return res.status(400).json({ status: "failure", error: "failed to create assignment" });
+
+  return Course.findByIdAndUpdate({ _id: req.params.courseId }, { $push: {assignmentIds: assignment._id.toString() }}, {new: true})
+    .then(() => res.status(200).json({ status: "success", data: assignment._id.toString() }))
+    .catch(async () => {
+      await Assignment.deleteOne({ _id: assignment._id.toString() })
+      return res.status(404).json({ status: "failure", error: "course not found" })
+    })
 });
 
 module.exports = router;
