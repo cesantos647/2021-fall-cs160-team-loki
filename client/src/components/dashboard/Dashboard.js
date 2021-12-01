@@ -37,20 +37,20 @@ class Dashboard extends Component {
   // on page load
   async componentDidMount() {
     const userId = await this.props.auth.user.id        // get userID (who is logged in)
-    const user = await getUser(userId)                  // axios call to get user (authActions -> routes/api/users.js)
+    const user = await getUser(userId)                  // axios call to get user
     localStorage.setItem("user", JSON.stringify(user)); // update user data in localStorage
-    this.setState({ user: user })                       // put response into state d
+    this.setState({ user: user })                       // put response into state
 
     const promises = this.state.user.courseIds ? this.state.user.courseIds.map(id => this.getCourse(id)) : []  // get array of promises
-    const courses = await Promise.all(promises)                               // retrieve data from promises (the course objects)
-    this.setState({ courses: courses })                                       // put response into state
+    const courses = await Promise.all(promises) // retrieve data from promises (the course objects)
+    this.setState({ courses: courses }) // put response into state
 
     courses.map(course => {
       this.setState({ assignments: this.state.assignments.concat(course.assignmentIds) }) // putting assignments into state
     })
 
     const assignPromises = this.state.assignments ? this.state.assignments.map(id => this.getAssignment(id)) : []   // retrieve assignment objs from db using ids
-    const assignObjs = await Promise.all(assignPromises)                              // await promises
+    const assignObjs = await Promise.all(assignPromises)  // await promises
     assignObjs.sort(function(a, b) {
       var keyA = new Date(a.dueDate), keyB = new Date(b.dueDate);
       if (keyA < keyB) return -1;
