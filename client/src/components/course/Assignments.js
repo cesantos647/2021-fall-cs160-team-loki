@@ -20,25 +20,9 @@ const Assignments = () => {
     const userId = JSON.parse(localStorage.user).id
     setUserId(JSON.parse(localStorage.user).id)
 
-    // REST calls.
-    const getAllAssignments = async (userId, courseId) => {
-      return await getUserAssignments(userId)
-        .then(res => {
-          return res;
-        })
-        .catch(() => { })
-    }
-    const getCourseAssignment = async (assignmentId) => {
-      return await getAssignment(assignmentId)
-        .then(res => {
-          return res;
-        })
-        .catch(() => { })
-    }
-
     // Parse assignments of a given course from user's total assignments.
     let tmpAllAssignmentIds = [];
-    tmpAllAssignmentIds = await getAllAssignments(userId, courseId);
+    tmpAllAssignmentIds = await getUserAssignments(userId);
     const tmpCourseAssignmentIds = tmpAllAssignmentIds[courseId]
     setAllAssignmentIds(tmpAllAssignmentIds)
     setCourseAssignmentIds(tmpCourseAssignmentIds)
@@ -46,7 +30,7 @@ const Assignments = () => {
     // Retrieve rest of assignment data using assignment ids and then store it.
     let assignmentData = []
     if (tmpCourseAssignmentIds) {
-      assignmentData = await Promise.all(tmpCourseAssignmentIds.map(async id => await getCourseAssignment(id)))
+      assignmentData = await Promise.all(tmpCourseAssignmentIds.map(async id => await getAssignment(id)))
     }
     setAssignmentData(assignmentData)
   }, [userId, courseId])

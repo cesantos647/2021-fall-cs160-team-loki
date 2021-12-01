@@ -40,7 +40,11 @@ class CourseCreation extends Component {
     console.log(this.props);
     const courseId = await this.props.createCourse(newCourse, this.props.history);
     console.log(courseId)
-    this.props.addUserToCourse(courseId, this.props.auth.user.id)
+    await this.props.addUserToCourse(courseId, this.props.auth.user.id)
+    
+    this.props.history.push(`/courses/${courseId}/assignments`)
+    // There's a bug where pushing to assignments page doesn't load HTML until reload.
+    window.location.reload()
   };
 
   render() {

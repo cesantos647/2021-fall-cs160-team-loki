@@ -27,20 +27,20 @@ const Navbar = (props) => {
 
   // Do async REST calls on startup, after user data is retrieved from local storage.
   useEffect(async () => {
-    // REST calls.
-    const getCourse = async (courseId) => {
-      return await getCourseDetails(courseId)
-        .then(res => {
-          // Course data doesn't include its id. Add it.
-          res["courseId"] = courseId
-          return res;
-        })
-        .catch(() => { })
-    }
+    // // REST calls.
+    // const getCourse = async (courseId) => {
+    //   return await getCourseDetails(courseId)
+    //     .then(res => {
+    //       // Course data doesn't include its id. Add it.
+    //       res["courseId"] = courseId
+    //       return res;
+    //     })
+    //     .catch(() => { })
+    // }
 
     // Retrieve course data of every course user is a part of and store it.
     let tmpIds = []
-    if (userCourseIds.length) {
+    if (JSON.parse(localStorage.user).courseIds.length) {
       tmpIds = await Promise.all(userCourseIds.map(async id => await getCourse(id)))
     }
     setUserCourseData(tmpIds)

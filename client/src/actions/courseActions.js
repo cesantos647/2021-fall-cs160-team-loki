@@ -20,9 +20,6 @@ export const createCourse = (courseData, history) => dispatch => {
     .then(res => {
       let courseId = res.data.data.courseId
       console.log("New course created /w ID: " + courseId)
-      history.push(`/courses/${courseId}/assignments`)
-      // There's a bug where pushing to assignments page doesn't load HTML until reload.
-      window.location.reload()
       return courseId
     })
     .catch(err =>
@@ -33,17 +30,13 @@ export const createCourse = (courseData, history) => dispatch => {
     );
 };
 
-export const addUserToCourse = (courseId, userId) => dispatch => {
+export const addUserToCourse = (courseId, userId) => async dispatch => {
   axios
     .put(`/api/courses/${courseId}/${userId}`)
     .catch(err =>
       console.log(err)
     );
 
-  const updateLocalUserData = async (uId) => {
-    const uData = await getUser(uId)
-    localStorage.setItem("user", JSON.stringify(uData))
-  } 
-
-  updateLocalUserData(userId)
+  const userData = await getUser(userId)
+  localStorage.setItem("user", JSON.stringify(userData))
 }
