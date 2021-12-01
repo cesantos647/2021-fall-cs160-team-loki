@@ -1,22 +1,61 @@
-import React, { useHistory } from "react-router-dom";
+import { useEffect, useState } from "react";
+import React, { useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
+import { getCourseDetails } from "../../actions/courseActions";
 import FloatButton from "./FloatButton";
 
 const Navbar = (props) => {
+  const [userCourseData, setUserCourseData] = useState({});
+  const [userCourseIds, setUserCourseIds] = useState("");
+  const [userId, setUserId] = useState("");
+  const [courseId] = useState(useParams().courseId);
+  const courseHomePage = "assignments"
+
   const onLogoutClick = e => {
     e.preventDefault();
     props.logoutUser();
   };
 
+  // Get user data on startup.
+  useEffect(() => {
+    const userData = JSON.parse(localStorage.user)
+    setUserId(userData.id)
+    setUserCourseIds(userData.courseIds)
+  }, [])
 
-  const userId = props.auth;
-  console.log(userId);
+  // Do async REST calls on startup, after user data is retrieved from local storage.
+  useEffect(async () => {
+    // REST calls.
+    const getCourse = async (courseId) => {
+      return await getCourseDetails(courseId)
+        .then(res => {
+          // Course data doesn't include its id. Add it.
+          res["courseId"] = courseId
+          return res;
+        })
+        .catch(() => { })
+    }
+
+    // Retrieve course data of every course user is a part of and store it.
+    let tmpIds = []
+    if (userCourseIds.length) {
+      tmpIds = await Promise.all(userCourseIds.map(async id => await getCourse(id)))
+    }
+    setUserCourseData(tmpIds)
+  }, [userCourseIds])
+
+  if (userCourseData.length) {
+    console.log("UserID: " + userId)
+    console.log("CourseID: " + courseId)
+    console.log(userCourseData)
+  }
+
   return (
     <div className="bg-gray-700">
-      <aside className="fixed z-30 grid h-full grid-rows-1 text-yellow-400 bg-blue-900 border-r-2 border-gray-700 shadow">
-        <div className="overflow-y-auto">
+      <aside className="fixed z-30 grid h-full grid-rows-2 text-yellow-400 bg-blue-900 border-r-2 border-gray-700 shadow">
+        <div className="overflow-y-visible">
           <div className="flex items-center w-full h-16">
             <img
               id="logo"
@@ -67,21 +106,24 @@ const Navbar = (props) => {
           </div>
         </div>
 
-        <div className="overflow-y-auto">
+        <div className="mt-6 overflow-y-auto align-bottom">
           <ul>
             <div className="animate-pulse">
-              <FloatButton label="+" bgcolor="bg-gray-900" url="/coursecreation" isaddbtn={true} />
+              <FloatButton label="+" bgcolor="gray" url="/coursecreation" isaddbtn={true} />
             </div>
-            <FloatButton label="CS 185C" bgcolor="bg-indigo-500" url="/courses/:courseid/chat" />
-            <FloatButton label="CS 157A" bgcolor="bg-pink-500" url="/courses/:courseid/chat" />
-            <FloatButton label="CS 160" bgcolor="bg-purple-500" url="/courses/:courseid/chat" isselected={true} />
+            {userCourseData.length ? userCourseData.map(course =>
+              <FloatButton
+                label={course.courseName}
+                bgcolor={course.courseColor ?? "purple"}
+                url={`/courses/${course.courseId}/${courseHomePage}`}
+                isselected={course.courseId === courseId}
+              />) : <></>}
           </ul>
         </div>
       </aside>
     </div>
   );
 }
-
 
 function PageButton(props) {
   return (
@@ -96,6 +138,7 @@ function PageButton(props) {
 }
 
 Navbar.propTypes = {
+  getCourseDetails: PropTypes.func.isRequired,
   logoutUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
 };
@@ -106,5 +149,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { logoutUser }
+  { logoutUser, getCourseDetails }
 )(Navbar);
