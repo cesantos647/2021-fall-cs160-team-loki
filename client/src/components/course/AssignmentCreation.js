@@ -4,8 +4,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import classnames from "classnames";
 import FormButton from "../form/FormButton";
-import { createAssignment } from "../../actions/assignmentActions"
-import { addAssignmentToCourse } from "../../actions/courseActions"
+import { createCourseAssignment } from "../../actions/assignmentActions"
 
 class AssignmentCreation extends Component {
   constructor() {
@@ -44,10 +43,8 @@ class AssignmentCreation extends Component {
       totalPossiblePoints: this.state.totalPossiblePoints,
       assignmentDescription: this.state.assignmentDescription
     };
-
-    const assignmentId = await this.props.createAssignment(newAssignment, this.props.history, this.props.match.params.courseId);
-    // Currently doesn't work until backend changed. See courseActions.js.
-    this.props.addAssignmentToCourse(this.props.match.params.courseId, assignmentId)
+  
+    await this.props.createCourseAssignment(newAssignment, this.props.history, this.props.match.params.courseId);
   };
 
   render() {
@@ -168,8 +165,7 @@ class AssignmentCreation extends Component {
 }
 
 AssignmentCreation.propTypes = {
-  createAssignment: PropTypes.func.isRequired,
-  addAssignmentToCourse: PropTypes.func.isRequired,
+  createCourseAssignment: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired
 };
 
@@ -179,5 +175,5 @@ const mapStateToProps = state => ({
 
 export default
   withRouter(
-  connect(mapStateToProps, { createAssignment, addAssignmentToCourse })
+  connect(mapStateToProps, { createCourseAssignment })
 (AssignmentCreation));

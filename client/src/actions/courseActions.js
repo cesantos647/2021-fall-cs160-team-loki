@@ -1,5 +1,6 @@
 import axios from "axios";
 import { GET_ERRORS } from "./types"
+import { getUser } from "./authActions";
 
 export const getCourseDetails = (courseId, history) => {
   return axios
@@ -20,6 +21,8 @@ export const createCourse = (courseData, history) => dispatch => {
       let courseId = res.data.data.courseId
       console.log("New course created /w ID: " + courseId)
       history.push(`/courses/${courseId}/assignments`)
+      // There's a bug where pushing to assignments page doesn't load HTML until reload.
+      window.location.reload()
       return courseId
     })
     .catch(err =>
@@ -36,13 +39,11 @@ export const addUserToCourse = (courseId, userId) => dispatch => {
     .catch(err =>
       console.log(err)
     );
-}
 
-// URL currently doesn't exist; backend needs to add a way to add an assignment to a course.
-export const addAssignmentToCourse = (courseId, assignmentId) => dispatch => {
-  axios
-    .put(`/api/courses/${courseId}/${assignmentId}`)
-    .catch(err =>
-      console.log(err)
-    );
+  const updateLocalUserData = async (uId) => {
+    const uData = await getUser(uId)
+    localStorage.setItem("user", JSON.stringify(uData))
+  } 
+
+  updateLocalUserData(userId)
 }

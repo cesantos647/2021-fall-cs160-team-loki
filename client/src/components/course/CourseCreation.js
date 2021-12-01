@@ -40,7 +40,7 @@ class CourseCreation extends Component {
     console.log(this.props);
     const courseId = await this.props.createCourse(newCourse, this.props.history);
     console.log(courseId)
-    this.props.addUserToCourse(this.props.auth.user.id, courseId)
+    this.props.addUserToCourse(courseId, this.props.auth.user.id)
   };
 
   render() {

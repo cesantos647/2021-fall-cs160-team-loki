@@ -19,7 +19,7 @@ const Assignments = () => {
     // Get user id.
     const userId = JSON.parse(localStorage.user).id
     setUserId(JSON.parse(localStorage.user).id)
-    
+
     // REST calls.
     const getAllAssignments = async (userId, courseId) => {
       return await getUserAssignments(userId)
@@ -39,7 +39,7 @@ const Assignments = () => {
     // Parse assignments of a given course from user's total assignments.
     let tmpAllAssignmentIds = [];
     tmpAllAssignmentIds = await getAllAssignments(userId, courseId);
-    const tmpCourseAssignmentIds = tmpAllAssignmentIds.userId
+    const tmpCourseAssignmentIds = tmpAllAssignmentIds[courseId]
     setAllAssignmentIds(tmpAllAssignmentIds)
     setCourseAssignmentIds(tmpCourseAssignmentIds)
 
@@ -82,71 +82,15 @@ const Assignments = () => {
         <div className="p-4 mb-6 border-t-4 border-yellow-400" >
           <h1 className="px-2 pt-2 pb-6 text-xl text-yellow-400">Upcoming Assignments</h1>
           <ul className="border-4 border-gray-600 border-opacity-25">
-            <div className="box-content flex p-4 bg-gray-700 border-2 border-t-0 border-green-400 border-opacity-50 hover:opacity-70">
-              <div className="flex-1 pt-2 text-left">
-                <p className="text-lg font-semibold text-gray-100">Assignment 2</p>
-                <p className="pt-1 text-green-400 text-md">Submitted</p>
-              </div>
-              <div className="flex-1 pt-3 text-sm text-right">
-                <p className="font-semibold text-pink-400">10/24/2021</p>
-                <p className="text-gray-400 pt-0.5">11/1/2021</p>
-              </div>
-            </div>
-            <div className="box-content flex p-4 bg-gray-700 border-2 border-t-0 border-red-400 border-opacity-50 hover:opacity-70">
-              <div className="flex-1 pt-2 text-left">
-                <p className="text-lg font-semibold text-gray-100">Assignment 3</p>
-                <p className="pt-1 text-red-400 text-md">No Submission</p>
-              </div>
-              <div className="flex-1 pt-3 text-sm text-right">
-                <p className="font-semibold text-pink-400">11/1/2021</p>
-                <p className="text-gray-400 pt-0.5">11/8/2021</p>
-              </div>
-            </div>
-            <div className="box-content flex p-4 bg-gray-700 border-2 border-t-0 border-yellow-400 border-opacity-50 hover:opacity-70">
-              <div className="flex-1 pt-2 text-left">
-                <p className="text-lg font-semibold text-gray-100">Midterm 1</p>
-                <p className="pt-1 text-yellow-400 text-md">Opens 11/1/2021</p>
-              </div>
-              <div className="flex-1 pt-3 text-sm text-right">
-                <p className="font-semibold text-pink-400">11/1/2021</p>
-                <p className="text-gray-400 pt-0.5">11/1/2021</p>
-              </div>
-            </div>
+            <AssignmentButton name="New Assignment" issubmitted={false} isgraded={true} opendate={"2021-12-01"} duedate={"2021-12-07"} closedate={"2021-12-14"} pts="0" posspts="200" />
+            <AssignmentButton name="New Assignment" issubmitted={false} isgraded={false} opendate={"2021-12-25"} duedate={"2022-01-01"} closedate={"2022-01-01"} pts="0" posspts="10" />
           </ul>
         </div>
         <div className="p-4 mb-6 border-t-4 border-yellow-400" >
           <h1 className="px-2 pt-2 pb-6 text-xl text-yellow-400">Past Assignments</h1>
           <ul className="border-4 border-gray-600 border-opacity-25">
-            <div className="box-content flex p-4 bg-gray-700 border-2 border-t-0 border-green-400 border-opacity-50 hover:opacity-70">
-              <div className="flex-1 pt-2 text-left">
-                <p className="text-lg font-semibold text-gray-100">Assignment 1</p>
-                <p className="pt-1 font-bold text-green-400 text-md">30/40</p>
-              </div>
-              <div className="flex-1 pt-3 text-sm text-right">
-                <p className="font-semibold text-pink-400">10/15/2021</p>
-                <p className="text-gray-400 pt-0.5">10/22/2021</p>
-              </div>
-            </div>
-            <div className="box-content flex p-4 bg-gray-700 border-2 border-t-0 border-green-400 border-opacity-50 hover:opacity-70">
-              <div className="flex-1 pt-2 text-left">
-                <p className="text-lg font-semibold text-gray-100">Quiz 1</p>
-                <p className="pt-1 font-bold text-green-400 text-md">25/40</p>
-              </div>
-              <div className="flex-1 pt-3 text-sm text-right">
-                <p className="font-semibold text-pink-400">10/24/2021</p>
-                <p className="text-gray-400 pt-0.5">10/24/2021</p>
-              </div>
-            </div>
-            <div className="box-content flex p-4 bg-gray-700 border-2 border-t-0 border-red-400 border-opacity-50 hover:opacity-70">
-              <div className="flex-1 pt-2 text-left">
-                <p className="text-lg font-semibold text-gray-100">Proof of Requisite</p>
-                <p className="pt-1 text-red-400 text-md">Missing</p>
-              </div>
-              <div className="flex-1 pt-3 text-sm text-right">
-                <p className="font-semibold text-pink-400">8/30/2021</p>
-                <p className="text-gray-400 pt-0.5">8/30/2021</p>
-              </div>
-            </div>
+            <AssignmentButton name="New Assignment" issubmitted={true} isgraded={true} opendate={"2021-11-01"} duedate={"2021-11-01"} closedate={"2021-11-07"} pts="90" posspts="100" />
+            <AssignmentButton name="New Assignment" issubmitted={true} isgraded={true} opendate={"2021-11-01"} duedate={"2021-11-07"} closedate={"2021-11-07"} pts="100" posspts="100" />
           </ul>
         </div>
 
@@ -156,16 +100,14 @@ const Assignments = () => {
             {assignmentData.length ? assignmentData.map(assignment =>
               <AssignmentButton
                 name={assignment.assignmentName}
-                issubmitted={assignment.assignmentSubmissions.find(submission => submission.id === userId).submission !== undefined}
-                isgraded={assignment.studentPoints.find(submission => submission.id === userId).points !== undefined}
-                duedate={assignment.dueDate}
-                closedate={assignment.closeDate}
-                opendate={assignment.openDate}
-                pts={assignment.studentPoints.find(submission => submission.id === userId).points}
+                issubmitted={assignment.assignmentSubmissions.length && assignment.assignmentSubmissions.find(submission => submission.id === userId).submission !== undefined}
+                isgraded={assignment.studentPoints.length && assignment.studentPoints.find(submission => submission.id === userId).points !== undefined}
+                duedate={assignment.dueDate.replace(new RegExp('T.*Z'), '')}
+                closedate={assignment.closeDate.replace(new RegExp('T.*Z'), '')}
+                opendate={assignment.openDate.replace(new RegExp('T.*Z'), '')}
+                pts={assignment.studentPoints.length && assignment.studentPoints.find(submission => submission.id === userId).points}
                 posspts={assignment.totalPossiblePoints}
               />) : <></>}
-            <AssignmentButton name="New Assignment" issubmitted={true} isgraded={true} isopen={true} duedate="11/1/2021" closedate="11/7/2021" pts="90" posspts="100" />
-            <AssignmentButton name="New Assignment" issubmitted={false} isgraded={true} isopen={true} duedate="11/1/2021" closedate="-" pts="0" posspts="100" />
           </ul>
         </div>
       </div>
@@ -175,13 +117,15 @@ const Assignments = () => {
 
 function AssignmentButton(props) {
   return (
-    <div className={`box-content border-2 border-t-0 border-opacity-50 ${props.issubmitted ? "border-green-400" : "border-red-400"} bg-gray-700 p-4 flex hover:opacity-70`}>
+    <div className={`box-content border-2 border-t-0 border-opacity-50 ${Date.parse(props.opendate) < new Date() ? (props.issubmitted ? "border-green-400" : "border-red-400") : "border-yellow-400"} bg-gray-700 p-4 flex hover:opacity-70`}>
       <div className="flex-1 pt-2 text-left">
         <p className="text-lg font-semibold text-gray-100">{props.name}</p>
-        <div className={`text-md ${props.isopen ? (props.issubmitted ? "text-green-400" : "text-red-400") : "text-yellow-400"} pt-1`}>
+        <div className={`text-md ${Date.parse(props.opendate) <= new Date() ? (props.issubmitted ? "text-green-400" : "text-red-400") : "text-yellow-400"} pt-1`}>
           {props.isgraded ?
             <p className="font-bold">{props.pts + "/" + props.posspts}</p> :
-            <p>{props.issubmitted ? "Submitted" : "No Submission"}</p>
+            Date.parse(props.opendate) > new Date() ?
+              <p>Opens {props.opendate}</p> :
+              <p>{props.issubmitted ? "Submitted" : "No Submission"}</p>
           }
         </div>
       </div>
