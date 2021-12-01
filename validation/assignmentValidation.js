@@ -5,7 +5,7 @@ module.exports = Joi.object({
     'string.empty': 'Email is not allowed to be empty',
     'any.required': 'assignmentName is required'
   }),
-  assigmentDescription: Joi.string(),
+  assignmentDescription: Joi.string(),
   dueDate: Joi.alternatives([
     Joi.date(), 
     Joi.string()
