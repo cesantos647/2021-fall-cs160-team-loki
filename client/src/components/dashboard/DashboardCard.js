@@ -3,18 +3,16 @@ import React, { useState } from 'react'
 function DashboardCard({user, assignment}) {
     const dueDate = new Date(assignment.dueDate);
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-    const studentScore = 5
-    for (let i = 0; i < assignment.studentPoints.length; i++) {             // loop through all students in assignment
-        if (assignment.studentPoints[i].id == user) {          // 
+    let studentScore = -1
+    let submission = false
+    for (let i = 0; i < assignment.studentPoints.length; i++) {  // loop through all students in assignment
+        console.log(assignment.studentPoints[i].points)
+        if (assignment.studentPoints[i].id == user) {   // if id found, assign student score and change submission status to true
             studentScore = assignment.studentPoints[i].points
+            submission = true
         }
     }
-    const submission = false
-    // for (let i = 0; i < assignment.assignmentSubmissions.length; i++) {
-    //     if (Object.keys(assignment.assignmentSubmissions[i])[0] == user) {
-    //         submission = Object.values(assignment.studentPoints[i])[0]
-    //     }
-    // }
+
     return (
         <div>
             <div className="grid justify-items-center bg-gray-800">
@@ -27,7 +25,7 @@ function DashboardCard({user, assignment}) {
                         </div>
                     </div>
                     <div>
-                        {studentScore ?
+                        {studentScore != -1 ?
                             <h2>Score: {studentScore} / {assignment.totalPossiblePoints}</h2> :
                             <h2>__ / {assignment.totalPossiblePoints}</h2>
                             }
