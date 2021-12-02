@@ -5,6 +5,7 @@ import PrivateRoute from "../private-route/PrivateRoute";
 import Layout from "../layout/Layout";
 import CourseCreation from "../course/CourseCreation";
 import Dashboard from "../dashboard/Dashboard";
+import FAQ from "../supportpages/FAQ";
 
 function UserRouter() {
   return (
@@ -28,6 +29,10 @@ function UserRouter() {
       <PrivateRoute path="/settings">
         <Layout />
 
+      </PrivateRoute>
+      <PrivateRoute path="/faq">
+        <Layout />
+        <FAQ />
       </PrivateRoute>
     </Switch>
   )
