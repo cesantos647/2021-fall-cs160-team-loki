@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  backend:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    image: "teamloki/savnac-backend"
+    ports:
+      - "5000:5000"
+  frontend:
+    build:
+      context: ./client
+      dockerfile: ./Dockerfile
+    image: "teamloki/savnac-frontend"
+    ports:
+      - "3000:3000"
+    links:
+      - backend
