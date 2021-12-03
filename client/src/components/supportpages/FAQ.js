@@ -60,7 +60,7 @@ const FAQ = () => {
           To manually update, please go to the Dashboard and refresh the page twice." />
         <Question
           question="Is Savnac accessible as a service outside of downloading the source code and manually running it with NodeJS?"
-          answer="No; Savnac currently is not deployed to any cloud-based servers." />
+          answer="Yes! Go to https://teamloki-savnac-frontend.herokuapp.com." />
       </div>
     </div>
   )
