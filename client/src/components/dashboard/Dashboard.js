@@ -18,19 +18,19 @@ class Dashboard extends Component {
       errors: {}
     }
   }
-  
-  async getCourse( courseId ) {
+
+  async getCourse(courseId) {
     const response = await getCourseDetails(courseId)
     return response
   };
 
-  async getUser( userId ) {
+  async getUser(userId) {
     const response = await getUser(userId)
     return response
   }
 
-  async getAssignment( assignmentId ) {
-    const response = await(getAssignment(assignmentId))
+  async getAssignment(assignmentId) {
+    const response = await (getAssignment(assignmentId))
     return response
   }
 
@@ -38,7 +38,9 @@ class Dashboard extends Component {
   async componentDidMount() {
     const userId = await this.props.auth.user.id        // get userID (who is logged in)
     const user = await getUser(userId)                  // axios call to get user (authActions -> routes/api/users.js)
-    localStorage.setItem("user", JSON.stringify(user)); // update user data in localStorage
+    if (user.length) {
+      localStorage.setItem("user", JSON.stringify(user))
+    }
     this.setState({ user: user })                       // put response into state d
 
     const promises = this.state.user.courseIds ? this.state.user.courseIds.map(id => this.getCourse(id)) : []  // get array of promises
@@ -51,7 +53,7 @@ class Dashboard extends Component {
 
     const assignPromises = this.state.assignments ? this.state.assignments.map(id => this.getAssignment(id)) : []   // retrieve assignment objs from db using ids
     const assignObjs = await Promise.all(assignPromises)                              // await promises
-    assignObjs.sort(function(a, b) {
+    assignObjs.sort(function (a, b) {
       var keyA = new Date(a.dueDate), keyB = new Date(b.dueDate);
       if (keyA < keyB) return -1;
       if (keyB > keyA) return 1;
@@ -62,6 +64,7 @@ class Dashboard extends Component {
     console.log(this.state.assignments)
 
     this.setState({ isLoaded: true })
+
   }
 
   onLogoutClick = e => {
@@ -69,21 +72,27 @@ class Dashboard extends Component {
     this.props.logoutUser();
   };
 
-render() {
+
+  render() {
     const { user } = this.props.auth;
 
-return (
+    return (
       <div className="w-screen h-screen bg-gray-800 bg-cover center">
-          <div className="col s12">
-            <h1 className="py-8 text-2xl text-center text-white flow-text grey-text">
-              Welcome to the dashboard
-            </h1>
-            <div>
-              <h1 className="text-white ">Sorted by due date</h1>
-            </div>
-            {this.state.isLoaded ? this.state.assignments.map(assignment => <DashboardCard user={user.id} assignment={assignment}/>) : <div> Loading </div>}
+        <a 
+          href={"/faq"}
+          className="fixed top-0 right-0 mt-4 mr-4 text-sm font-bold text-blue-500 hover:text-green-400 animate-bounce">
+          FAQ
+        </a>
+        <div className="ml-12 col">
+          <h1 className="py-8 font-mono text-2xl font-semibold text-center text-white flow-text grey-text">
+            Welcome back, <span className="font-bold text-green-400">{this.state.user.name}</span>
+          </h1>
+          <div>
+            <h1 className="font-sans text-sm font-semibold text-center text-yellow-400 text-bold">UPCOMING ASSIGNMENTS</h1>
           </div>
+          {this.state.isLoaded ? this.state.assignments.map(assignment => <DashboardCard user={user.id} assignment={assignment} />) : <div> Loading </div>}
         </div>
+      </div>
     );
   }
 }

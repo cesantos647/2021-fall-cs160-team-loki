@@ -5,15 +5,16 @@ import PrivateRoute from "../private-route/PrivateRoute";
 import Layout from "../layout/Layout";
 import CourseCreation from "../course/CourseCreation";
 import Dashboard from "../dashboard/Dashboard";
+import FAQ from "../supportpages/FAQ";
 
-function CourseRouter(props) {
+function UserRouter() {
   return (
     <Switch>
-      <PrivateRoute path="/coursecreation" component={CourseCreation}>
+      <PrivateRoute path="/coursecreation">
         <Layout />
         <CourseCreation />
       </PrivateRoute>
-      <PrivateRoute path="/dashboard" component={Dashboard}>
+      <PrivateRoute path="/dashboard">
         <Layout />
         <Dashboard />
       </PrivateRoute>
@@ -29,9 +30,13 @@ function CourseRouter(props) {
         <Layout />
 
       </PrivateRoute>
+      <PrivateRoute path="/faq">
+        <Layout />
+        <FAQ />
+      </PrivateRoute>
     </Switch>
   )
 }
 
 export default connect(
-)(CourseRouter);
+)(UserRouter);

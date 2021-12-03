@@ -3,7 +3,7 @@ import classnames from "classnames";
 function FormField(props) {
   return (
     <div className="my-4">
-      <label class="block text-gray-300 text-sm font-bold mb-2">
+      <label className="block mb-2 text-sm font-bold text-gray-300">
         {props.label}
       </label>
       {props.isarea ?

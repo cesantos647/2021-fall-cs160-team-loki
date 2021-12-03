@@ -81,3 +81,15 @@ export const getUser = (userId, history) => {
     }
     );
 };
+
+export const getUserAssignments = (userId, history) => {
+  return axios
+    .get(`/api/users/${userId}/assignments`)
+    .then(res => {
+      return res.data.data
+    })
+    .catch(err => {
+      console.log(err)
+    }
+    );
+};

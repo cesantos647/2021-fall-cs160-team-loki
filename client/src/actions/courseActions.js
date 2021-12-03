@@ -1,5 +1,6 @@
 import axios from "axios";
-import {GET_ERRORS} from "./types"
+import { GET_ERRORS } from "./types"
+import { getUser } from "./authActions";
 
 export const getCourseDetails = (courseId, history) => {
   return axios
@@ -14,12 +15,12 @@ export const getCourseDetails = (courseId, history) => {
 };
 
 export const createCourse = (courseData, history) => dispatch => {
-  axios
+  return axios
     .post("/api/courses", courseData)
     .then(res => {
       let courseId = res.data.data.courseId
-      console.log("New Course ID: " + courseId);
-      history.push(`/courses/${courseId}/chat`)
+      console.log("New course created /w ID: " + courseId)
+      return courseId
     })
     .catch(err =>
       dispatch({
@@ -28,3 +29,14 @@ export const createCourse = (courseData, history) => dispatch => {
       })
     );
 };
+
+export const addUserToCourse = (courseId, userId) => async dispatch => {
+  axios
+    .put(`/api/courses/${courseId}/${userId}`)
+    .catch(err =>
+      console.log(err)
+    );
+
+  const userData = await getUser(userId)
+  localStorage.setItem("user", JSON.stringify(userData))
+}
