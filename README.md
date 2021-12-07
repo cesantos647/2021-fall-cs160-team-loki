@@ -1,6 +1,8 @@
 # 2021-fall-cs160-team-loki
 Fall 2021 CS 160 Team Loki
 
+Deployed Frontend: https://teamloki-savnac-frontend.herokuapp.com/
+Deployed Backend: https://teamloki-savnac.herokuapp.com/
 
 To Begin:
 - Do an 'npm install' to get all of the necessary node_module folders
