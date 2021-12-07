@@ -2,6 +2,7 @@
 Fall 2021 CS 160 Team Loki
 
 Deployed Frontend: https://teamloki-savnac-frontend.herokuapp.com/
+
 Deployed Backend: https://teamloki-savnac.herokuapp.com/
 
 To Begin:
